@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "47803022139",
+    "project_id": "automotots",
+    "storage_bucket": "automotots.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47803022139:android:c993b80b9d84e00e19151e",
+        "android_client_info": {
+          "package_name": "com.example.automotomaintenance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47803022139-vveju339eaaak2aar85vdnhajn7utft2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGGGYDLKbHdLr_65uAqGOIO0z9svbnJL8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47803022139-vveju339eaaak2aar85vdnhajn7utft2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
