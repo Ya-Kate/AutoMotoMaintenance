@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">AutoMotoMaintenance</string>
+    <string name="start">start</string>
+    <string name="brand">brand</string>
+    <string name="number">number</string>
+    <string name="year">year</string>
+    <string name="volume">volume</string>
+    <string name="logout">logout</string>
+    <string name="add_vehicle">ADD vehicle</string>
+    <string name="auto">Auto</string>
+    <string name="moto">Moto</string>
+    <string name="auto_">AUTO:</string>
+    <string name="moto_">MOTO:</string>
+    <string name="email">email</string>
+    <string name="enter">Enter</string>
+    <string name="register">Register</string>
+    <string name="auto_amp_moto"><![CDATA[Auto & Moto]]></string>
+    <string name="maintenance">Maintenance</string>
+    <string name="list">list</string>
+    <string name="search">search</string>
+    <string name="company">company</string>
+    <string name="add_menu">add</string>
+    <string name="add_car">add car</string>
+    <string name="add_bike">add motorbike</string>
+    <string name="password">password</string>
 </resources>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:layout_height="wrap_content">
+            <solid android:color="#FAFFFD" />
+        </shape>
+    </item>
+        <item><shape>
+            <gradient
+                android:type="radial"
+                android:gradientRadius="100%"
+                android:startColor="@color/bg_fragment_one"
+                android:centerX="0.1"
+                android:centerY="0.1"
+                android:endColor="@android:color/transparent" />
+        </shape></item>
+    <item>
+        <shape>
+            <gradient
+                android:centerX="0.8"
+                android:centerY="0.5"
+                android:endColor="@android:color/transparent"
+                android:gradientRadius="70%"
+                android:startColor="@color/bg_fragment_two"
+                android:type="radial" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <gradient
+                android:centerX="0.8"
+                android:centerY="0.1"
+                android:endColor="@android:color/transparent"
+                android:gradientRadius="40%"
+                android:startColor="@color/bg_fragment_three"
+                android:type="radial" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <gradient
+                android:centerX="0.3"
+                android:centerY="0.8"
+                android:endColor="@android:color/transparent"
+                android:gradientRadius="70%"
+                android:startColor="@color/bg_fragment_four"
+                android:type="radial" />
+        </shape>
+    </item>
+
+    <item>
+        <shape>
+            <gradient
+                android:centerX="0.0"
+                android:centerY="1.0"
+                android:endColor="@android:color/transparent"
+                android:gradientRadius="35%"
+                android:startColor="@color/bg_fragment_five"
+                android:type="radial" />
+        </shape>
+    </item>
+
+    <item>
+        <shape>
+            <gradient
+                android:centerX="0.7"
+                android:centerY="0.85"
+                android:endColor="@android:color/transparent"
+                android:gradientRadius="50%"
+                android:startColor="@color/bg_fragment_six"
+                android:type="radial" />
+        </shape>
+    </item>
+
+</layer-list>
