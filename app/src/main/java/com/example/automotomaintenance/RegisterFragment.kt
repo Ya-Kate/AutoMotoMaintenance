@@ -9,11 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.automotomaintenance.databinding.FragmentRegisterBinding
 import com.example.automotomaintenance.repository.AuthRepository
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class RegisterFragment : Fragment() {
+@AndroidEntryPoint
+class RegisterFragment @Inject constructor() : Fragment() {
 
-    private val authRepository = AuthRepository()
-
+    @Inject
+    lateinit var authRepository: AuthRepository
     private lateinit var binding: FragmentRegisterBinding
 
     override fun onCreateView(
@@ -32,12 +35,12 @@ class RegisterFragment : Fragment() {
             authRepository.login(
                 binding.email.editText?.text.toString().trim(),
                 binding.password.editText?.text.toString().trim(), {
-                    findNavController().navigate(R.id.action_startProjectFragment2_to_fragment_add_vehicle)
+                    findNavController().navigate(R.id.action_registerFragment_to_navigationMainFragment)
                 }, {
                     binding.errorText.text = it.toString()
                     val animation = ValueAnimator.ofFloat(1F, 0F)
-                    animation.addUpdateListener {
-                        binding.errorText.alpha = it.animatedValue as Float
+                    animation.addUpdateListener { value ->
+                        binding.errorText.alpha = value.animatedValue as Float
                     }
                     animation.duration = 3000
                     animation.start()
@@ -49,12 +52,12 @@ class RegisterFragment : Fragment() {
             authRepository.register(
                 binding.email.editText?.text.toString().trim(),
                 binding.password.editText?.text.toString().trim(), {
-                    findNavController().navigate(R.id.action_startProjectFragment2_to_navigationMainFragment)
+                    findNavController().navigate(R.id.action_registerFragment_to_navigationMainFragment)
                 }, {
                     binding.errorText.text = it.toString()
                     val animation = ValueAnimator.ofFloat(1F, 0F)
-                    animation.addUpdateListener {
-                        binding.errorText.alpha = it.animatedValue as Float
+                    animation.addUpdateListener { value ->
+                        binding.errorText.alpha = value.animatedValue as Float
 
                     }
                     animation.duration = 3000

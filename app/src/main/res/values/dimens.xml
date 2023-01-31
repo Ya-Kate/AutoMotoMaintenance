@@ -24,4 +24,5 @@
     <dimen name="dp10">10dp</dimen>
     <dimen name="sp32">32sp</dimen>
     <dimen name="sp24">24sp</dimen>
+    <dimen name="dp300">300dp</dimen>
 </resources>

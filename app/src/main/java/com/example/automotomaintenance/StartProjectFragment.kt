@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.automotomaintenance.databinding.FragmentStartProjectBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class StartProjectFragment : Fragment() {
 
     private lateinit var binding: FragmentStartProjectBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

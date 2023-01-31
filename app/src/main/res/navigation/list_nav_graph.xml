@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list"
+    app:startDestination="@id/ListVehicleFragment">
+
+    <fragment
+        android:id="@+id/ListVehicleFragment"
+        android:name="com.example.automotomaintenance.ui.list.ListVehicleFragment"
+        tools:layout="@layout/fragment_list_vehical">
+        <action
+            android:id="@+id/action_ListVehicleFragment_to_autoFragment"
+            app:destination="@id/autoFragment" />
+        <action
+            android:id="@+id/action_ListVehicleFragment_to_motoFragment"
+            app:destination="@id/motoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/autoFragment"
+        android:name="com.example.automotomaintenance.ui.auto.AutoFragment"
+        android:label="AutoFragment">
+        <argument
+            android:name="autoArg"
+            app:argType="string"
+            android:defaultValue="No" />
+    </fragment>
+    <fragment
+        android:id="@+id/motoFragment"
+        android:name="com.example.automotomaintenance.ui.moto.MotoFragment"
+        android:label="MotoFragment" >
+        <argument
+            android:name="motoArg"
+            app:argType="string"
+            android:defaultValue="No" />
+    </fragment>
+
+</navigation>

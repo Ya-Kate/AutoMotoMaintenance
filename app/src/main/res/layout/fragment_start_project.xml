@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_fragment"
     android:orientation="vertical"
-    app:navGraph="@navigation/graf_main">
+    app:navGraph="@navigation/main_nav_graph">
 
     <TextView
         android:layout_width="wrap_content"

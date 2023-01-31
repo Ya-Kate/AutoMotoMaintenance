@@ -1,22 +1,31 @@
-package com.example.automotomaintenance
+package com.example.automotomaintenance.ui.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.automotomaintenance.adapter.CarAdapter
 import com.example.automotomaintenance.adapter.MotorBikeAdapter
 import com.example.automotomaintenance.databinding.FragmentListVehicalBinding
 import com.example.automotomaintenance.repository.FifeBaseRepository
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class ListVehicleFragment : Fragment() {
+@AndroidEntryPoint
+class ListVehicleFragment @Inject constructor() :
+    Fragment() {
 
-    private lateinit var binding: FragmentListVehicalBinding
+    private lateinit var binding:FragmentListVehicalBinding
     private lateinit var adapterAuto: CarAdapter
     private lateinit var adapterMoto: MotorBikeAdapter
-    private val fifeBaseRepository = FifeBaseRepository()
+    private val viewModel: ListVehicleViewModel by viewModels()
+
+    @Inject
+    lateinit var fifeBaseRepository: FifeBaseRepository
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,14 +39,30 @@ class ListVehicleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapterAuto = CarAdapter()
+//        val bundle = Bundle()
+        adapterAuto = CarAdapter{
+            val numberAuto = it
+            val action = ListVehicleFragmentDirections.actionListVehicleFragmentToAutoFragment(numberAuto)
+            findNavController().navigate(action)
+        }
         binding.listAuto.adapter = adapterAuto
         binding.listAuto.layoutManager = LinearLayoutManager(requireContext())
         fifeBaseRepository.getCars {
             adapterAuto.submitList(it)
         }
 
-        adapterMoto = MotorBikeAdapter()
+//        lifecycleScope.launchWhenStarted {
+//            viewModel.listAuto.observe(this,Observer {
+//                    adapterAuto.submitList(it)
+//                }
+//            )
+//        }
+
+        adapterMoto = MotorBikeAdapter{
+            val numberMoto = it
+            val action = ListVehicleFragmentDirections.actionListVehicleFragmentToMotoFragment(numberMoto)
+            findNavController().navigate(action)
+        }
         binding.listMoto.adapter = adapterMoto
         binding.listMoto.layoutManager = LinearLayoutManager(requireContext())
         fifeBaseRepository.getMotorBike {

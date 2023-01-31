@@ -9,11 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.automotomaintenance.databinding.FragmentAddVehicleBinding
 import com.example.automotomaintenance.repository.AuthRepository
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class AddVehiclesFragment : Fragment() {
 
-    private val authRepository = AuthRepository()
-
+    @Inject
+    lateinit var authRepository: AuthRepository
     private lateinit var binding: FragmentAddVehicleBinding
 
     override fun onCreateView(
@@ -47,16 +50,11 @@ class AddVehiclesFragment : Fragment() {
         }
 
         binding.addAuto.setOnClickListener {
-            findNavController().navigate(R.id.action_addVehiclesFragment_to_addAutoFragment)
+            findNavController().navigate(R.id.action_AddVehiclesFragment_to_addAutoFragment)
         }
 
         binding.addMoto.setOnClickListener {
-            findNavController().navigate(R.id.action_addVehiclesFragment_to_addMotoFragment)
+            findNavController().navigate(R.id.action_AddVehiclesFragment_to_addMotoFragment)
         }
-
-        binding.list.setOnClickListener {
-            findNavController().navigate(R.id.action_addVehicle_to_listVehicleFragment)
-        }
-
     }
 }

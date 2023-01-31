@@ -23,4 +23,5 @@
     <string name="add_car">add car</string>
     <string name="add_bike">add motorbike</string>
     <string name="password">password</string>
+    <string name="back"><![CDATA[<-- back]]></string>
 </resources>
