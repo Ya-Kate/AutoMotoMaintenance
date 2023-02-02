@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -20,7 +19,7 @@
             android:layout_marginStart="@dimen/dp35"
             android:layout_marginTop="@dimen/dp100"
             android:layout_marginEnd="@dimen/dp35"
-            android:hint="@string/brand"
+            android:hint="@string/km"
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -36,7 +35,7 @@
             android:layout_marginStart="@dimen/dp35"
             android:layout_marginTop="@dimen/dp24"
             android:layout_marginEnd="@dimen/dp35"
-            android:hint="@string/number"
+            android:hint="@string/data"
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -52,7 +51,7 @@
             android:layout_marginStart="@dimen/dp35"
             android:layout_marginTop="@dimen/dp24"
             android:layout_marginEnd="@dimen/dp35"
-            android:hint="@string/year"
+            android:hint="@string/type_of_services"
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -68,13 +67,14 @@
             android:layout_marginStart="@dimen/dp35"
             android:layout_marginTop="@dimen/dp24"
             android:layout_marginEnd="@dimen/dp35"
-            android:hint="@string/volume"
+            android:hint="@string/cost"
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_add_text" />
+                android:background="@drawable/bg_add_text"
+                android:drawableEnd="@drawable/ic_dollar_24" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -99,8 +99,8 @@
             android:layout_marginTop="@dimen/dp150"
             android:layout_marginBottom="@dimen/dp50"
             android:background="@drawable/bg_add"
-            android:paddingStart="@dimen/dp70"
-            android:paddingEnd="@dimen/dp70"
-            android:text="@string/add_car" />
+            android:paddingStart="@dimen/dp35"
+            android:paddingEnd="@dimen/dp35"
+            android:text="@string/add_maintenance" />
     </LinearLayout>
 </ScrollView>

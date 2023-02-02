@@ -10,6 +10,9 @@
         android:name="com.example.automotomaintenance.ui.list.ListVehicleFragment"
         tools:layout="@layout/fragment_list_vehical">
         <action
+            android:id="@+id/action_ListVehicleFragment_to_itemBottomDialog"
+            app:destination="@id/itemBottomDialog" />
+        <action
             android:id="@+id/action_ListVehicleFragment_to_autoFragment"
             app:destination="@id/autoFragment" />
         <action
@@ -24,6 +27,9 @@
             android:name="autoArg"
             app:argType="string"
             android:defaultValue="No" />
+        <action
+            android:id="@+id/action_autoFragment_to_ListVehicleFragment"
+            app:destination="@id/ListVehicleFragment" />
     </fragment>
     <fragment
         android:id="@+id/motoFragment"
@@ -33,6 +39,25 @@
             android:name="motoArg"
             app:argType="string"
             android:defaultValue="No" />
+        <action
+            android:id="@+id/action_motoFragment_to_ListVehicleFragment"
+            app:destination="@id/ListVehicleFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/itemBottomDialog"
+        android:name="com.example.automotomaintenance.ItemBottomDialog"
+        android:label="ItemBottomDialog" >
+        <action
+            android:id="@+id/action_itemBottomDialog_to_addServiceFragment"
+            app:destination="@id/addServiceFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/addServiceFragment"
+        android:name="com.example.automotomaintenance.ui.addService.AddServiceFragment"
+        android:label="AddServiceFragment" >
+        <action
+            android:id="@+id/action_addServiceFragment_to_ListVehicleFragment"
+            app:destination="@id/ListVehicleFragment" />
     </fragment>
 
 </navigation>

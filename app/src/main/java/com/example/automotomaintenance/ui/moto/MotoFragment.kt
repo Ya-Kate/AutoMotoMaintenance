@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.automotomaintenance.R
 import com.example.automotomaintenance.databinding.FragmentMotoBinding
 import com.example.automotomaintenance.repository.FifeBaseRepository
 import com.example.automotomaintenance.ui.auto.AutoFragmentArgs
@@ -47,5 +49,10 @@ class MotoFragment : Fragment() {
                 binding.volume.text = list[0].volume + "cc"
             }
         }
+
+        binding.back.setOnClickListener {
+            findNavController().navigate(R.id.action_motoFragment_to_ListVehicleFragment)
+        }
+
     }
 }

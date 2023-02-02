@@ -8,10 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.automotomaintenance.ItemBottomDialog
+import com.example.automotomaintenance.R
 import com.example.automotomaintenance.adapter.CarAdapter
 import com.example.automotomaintenance.adapter.MotorBikeAdapter
 import com.example.automotomaintenance.databinding.FragmentListVehicalBinding
 import com.example.automotomaintenance.repository.FifeBaseRepository
+import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -19,7 +22,7 @@ import javax.inject.Inject
 class ListVehicleFragment @Inject constructor() :
     Fragment() {
 
-    private lateinit var binding:FragmentListVehicalBinding
+    private lateinit var binding: FragmentListVehicalBinding
     private lateinit var adapterAuto: CarAdapter
     private lateinit var adapterMoto: MotorBikeAdapter
     private val viewModel: ListVehicleViewModel by viewModels()
@@ -40,16 +43,25 @@ class ListVehicleFragment @Inject constructor() :
         super.onViewCreated(view, savedInstanceState)
 
 //        val bundle = Bundle()
-        adapterAuto = CarAdapter{
+        adapterAuto = CarAdapter {
             val numberAuto = it
-            val action = ListVehicleFragmentDirections.actionListVehicleFragmentToAutoFragment(numberAuto)
-            findNavController().navigate(action)
+
+            ItemBottomDialog().apply {
+                onShowClicked = {
+                    val action =
+                        ListVehicleFragmentDirections.actionListVehicleFragmentToAutoFragment(
+                            numberAuto
+                        )
+                    findNavController().navigate(action)
+                }
+            }.show(childFragmentManager, "..")
         }
         binding.listAuto.adapter = adapterAuto
         binding.listAuto.layoutManager = LinearLayoutManager(requireContext())
         fifeBaseRepository.getCars {
             adapterAuto.submitList(it)
         }
+
 
 //        lifecycleScope.launchWhenStarted {
 //            viewModel.listAuto.observe(this,Observer {
@@ -58,10 +70,16 @@ class ListVehicleFragment @Inject constructor() :
 //            )
 //        }
 
-        adapterMoto = MotorBikeAdapter{
+        adapterMoto = MotorBikeAdapter {
             val numberMoto = it
-            val action = ListVehicleFragmentDirections.actionListVehicleFragmentToMotoFragment(numberMoto)
-            findNavController().navigate(action)
+
+            ItemBottomDialog().apply {
+                onShowClicked = {
+                    val action =
+                        ListVehicleFragmentDirections.actionListVehicleFragmentToMotoFragment(numberMoto)
+                    findNavController().navigate(action)
+                }
+            }.show(childFragmentManager, "..")
         }
         binding.listMoto.adapter = adapterMoto
         binding.listMoto.layoutManager = LinearLayoutManager(requireContext())
@@ -69,4 +87,6 @@ class ListVehicleFragment @Inject constructor() :
             adapterMoto.submitList(it)
         }
     }
+
+
 }

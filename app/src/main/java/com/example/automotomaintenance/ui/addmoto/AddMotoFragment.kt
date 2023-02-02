@@ -44,6 +44,13 @@ class AddMotoFragment : Fragment() {
 
             viewModel.addMoto(brand, number, year, volume)
 
+            binding.brand.editText?.text = null
+            binding.number.editText?.text = null
+            binding.year.editText?.text = null
+            binding.volume.editText?.text = null
+        }
+
+        binding.back.setOnClickListener {
             findNavController().navigate(R.id.action_addMotoFragment_to_AddVehiclesFragment)
         }
     }

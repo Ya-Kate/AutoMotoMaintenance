@@ -3,8 +3,10 @@ package com.example.automotomaintenance.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import com.example.automotomaintenance.ItemBottomDialog
 import com.example.automotomaintenance.databinding.ItemVehicleBinding
 import com.example.automotomaintenance.model.Vehicle
+import com.example.automotomaintenance.ui.list.ListVehicleFragment
 
 class CarAdapter(
     private val onClick: (number: String) -> Unit
@@ -25,6 +27,7 @@ class CarAdapter(
             holder.bind(getItem(position))
             holder.itemView.setOnClickListener {
                 onClick(vehicle.number ?: "")
+
             }
         }
     }

@@ -23,5 +23,10 @@
     <string name="add_car">add car</string>
     <string name="add_bike">add motorbike</string>
     <string name="password">password</string>
-    <string name="back"><![CDATA[<-- back]]></string>
+    <string name="back">back</string>
+    <string name="km">km</string>
+    <string name="data">data</string>
+    <string name="type_of_services">type of services</string>
+    <string name="cost">cost</string>
+    <string name="add_maintenance">add maintenance</string>
 </resources>
