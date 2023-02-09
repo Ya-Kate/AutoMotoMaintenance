@@ -31,14 +31,10 @@ class AddAutoFragment : Fragment() {
 
         binding.addInfo.setOnClickListener {
 
-            val buttonBrand = binding.brand
-            val buttonNumber = binding.number
-            val buttonYear = binding.year
-            val buttonVolume = binding.volume
-            val brand = buttonBrand.editText?.text.toString()
-            val number = buttonNumber.editText?.text.toString()
-            val year = buttonYear.editText?.text.toString()
-            val volume = buttonVolume.editText?.text.toString()
+            val brand = binding.brand.editText?.text.toString()
+            val number = binding.number.editText?.text.toString()
+            val year = binding.year.editText?.text.toString()
+            val volume = binding.volume.editText?.text.toString()
 
             viewModel.addAuto(brand, number, year, volume)
 

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_fragment"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textAuto"
+        style="@style/bg_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp80"
+        android:layout_marginTop="@dimen/dp50"
+        android:fontFamily="@font/ubuntu_regular"
+        android:shadowColor="@color/black"
+        android:shadowDx="7"
+        android:shadowDy="7"
+        android:shadowRadius="5"
+        android:text="@string/company_"
+        android:textColor="@color/bg_button"
+        android:textSize="@dimen/sp50" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listAuto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp20"
+        android:layout_marginTop="@dimen/dp16"
+        android:layout_marginEnd="@dimen/dp20"
+        android:scrollbars="vertical"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_start"
+        style="@style/bg_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp300"
+        android:background="@drawable/bg_button_start"
+        android:paddingStart="@dimen/dp24"
+        android:paddingEnd="@dimen/dp24"
+        android:text="@string/add_company" />
+
+</LinearLayout>

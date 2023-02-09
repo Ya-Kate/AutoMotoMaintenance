@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_button_text"
-        android:text="SHOW"
+        android:text="@string/show"
         app:layout_constraintEnd_toStartOf="@id/add_info"
         app:layout_constraintStart_toEndOf="@id/delete"
         app:layout_constraintTop_toBottomOf="@id/number" />
@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_button_text"
-        android:text="Delete"
+        android:text="@string/delete"
         app:layout_constraintEnd_toStartOf="@+id/show"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_button_text"
-        android:text="Add info"
+        android:text="@string/add_info"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/show"
         app:layout_constraintTop_toBottomOf="@id/number" />

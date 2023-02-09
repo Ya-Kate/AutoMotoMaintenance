@@ -30,6 +30,7 @@
     <color name="bg_fragment_second_five">#0438F8</color>
     <color name="bg_fragment_second_six">#9058F8</color>
     <color name="separator">#04BBA3</color>
+    <color name="separator_list">#734DDA</color>
 
 
 </resources>

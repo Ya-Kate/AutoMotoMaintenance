@@ -34,6 +34,7 @@ class NavigationMainFragment : Fragment(R.layout.fragment_navigation_main) {
         val navGraphIds = listOf(
             R.navigation.add_vehicle_nav_graph,
             R.navigation.list_nav_graph,
+            R.navigation.company_nav_graf
         )
         binding.bottomNavigation.setupWithNavController(
             navGraphIds = navGraphIds,

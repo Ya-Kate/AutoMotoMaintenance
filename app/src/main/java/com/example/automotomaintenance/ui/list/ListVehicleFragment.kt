@@ -1,6 +1,7 @@
 package com.example.automotomaintenance.ui.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.automotomaintenance.ItemBottomDialog
-import com.example.automotomaintenance.R
 import com.example.automotomaintenance.adapter.CarAdapter
 import com.example.automotomaintenance.adapter.MotorBikeAdapter
 import com.example.automotomaintenance.databinding.FragmentListVehicalBinding
 import com.example.automotomaintenance.repository.FifeBaseRepository
-import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -42,11 +41,18 @@ class ListVehicleFragment @Inject constructor() :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val bundle = Bundle()
         adapterAuto = CarAdapter {
             val numberAuto = it
 
             ItemBottomDialog().apply {
+                onAddService = {
+                    val action =
+                        ListVehicleFragmentDirections.actionListVehicleFragmentToAddServiceFragment(
+                            numberAuto
+                        )
+                    findNavController().navigate(action)
+                }
+
                 onShowClicked = {
                     val action =
                         ListVehicleFragmentDirections.actionListVehicleFragmentToAutoFragment(
@@ -63,20 +69,22 @@ class ListVehicleFragment @Inject constructor() :
         }
 
 
-//        lifecycleScope.launchWhenStarted {
-//            viewModel.listAuto.observe(this,Observer {
-//                    adapterAuto.submitList(it)
-//                }
-//            )
-//        }
-
         adapterMoto = MotorBikeAdapter {
             val numberMoto = it
 
             ItemBottomDialog().apply {
+                onAddService = {
+                    val action =
+                        ListVehicleFragmentDirections.actionListVehicleFragmentToAddMotoServiceFragment(
+                            numberMoto
+                        )
+                    findNavController().navigate(action)
+                }
+
                 onShowClicked = {
                     val action =
-                        ListVehicleFragmentDirections.actionListVehicleFragmentToMotoFragment(numberMoto)
+                        ListVehicleFragmentDirections.actionListVehicleFragmentToMotoFragment(
+                            numberMoto)
                     findNavController().navigate(action)
                 }
             }.show(childFragmentManager, "..")

@@ -13,7 +13,7 @@
         tools:ignore="ScrollViewSize">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/brand"
+            android:id="@+id/km"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp35"
@@ -28,24 +28,37 @@
                 android:background="@drawable/bg_add_text" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/number"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp35"
-            android:layout_marginTop="@dimen/dp24"
-            android:layout_marginEnd="@dimen/dp35"
-            android:hint="@string/data"
-            app:endIconMode="clear_text">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/choose_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp35"
+                android:layout_marginTop="@dimen/dp24"
+                android:background="@drawable/bg_add_text"
+                android:hint="@string/choose_date"
+                app:endIconMode="clear_text" />
+
+            <TextView
+                android:id="@+id/data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_add_text" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="@dimen/dp24"
+                android:layout_marginTop="@dimen/dp24"
+                android:layout_marginEnd="@dimen/dp35"
+                android:background="@drawable/bg_add_text"
+                android:hint="@string/date"
+                android:textColor="@color/black"
+                app:endIconMode="clear_text" />
+
+        </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/year"
+            android:id="@+id/service"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp35"
@@ -61,7 +74,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/volume"
+            android:id="@+id/cost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp35"
@@ -96,11 +109,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dp150"
+            android:layout_marginTop="@dimen/dp130"
             android:layout_marginBottom="@dimen/dp50"
             android:background="@drawable/bg_add"
-            android:paddingStart="@dimen/dp35"
-            android:paddingEnd="@dimen/dp35"
-            android:text="@string/add_maintenance" />
+            android:paddingStart="@dimen/dp40"
+            android:paddingEnd="@dimen/dp40"
+            android:text="@string/add_bike_maintenance" />
     </LinearLayout>
 </ScrollView>

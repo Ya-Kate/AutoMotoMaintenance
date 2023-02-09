@@ -84,7 +84,6 @@
             android:layout_marginTop="@dimen/dp40"
             android:layout_marginEnd="@dimen/dp32"
             android:background="@drawable/bg_button_back_add"
-            android:drawableStart="@drawable/ic_back"
             android:fontFamily="@font/ubuntu_regular"
             android:padding="@dimen/dp16"
             android:text="@string/back" />
@@ -95,8 +94,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dp150"
-            android:layout_marginBottom="@dimen/dp50"
+            android:layout_marginTop="@dimen/dp130"
+            android:layout_marginBottom="70dp"
             android:background="@drawable/bg_add"
             android:paddingStart="@dimen/dp35"
             android:paddingEnd="@dimen/dp35"

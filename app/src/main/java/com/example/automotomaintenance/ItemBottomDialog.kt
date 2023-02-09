@@ -12,6 +12,7 @@ class ItemBottomDialog : BottomSheetDialogFragment() {
 
     private lateinit var binding: DialogItemBinding
     var onShowClicked: (() -> Unit)? = null
+    var onAddService: (() -> Unit)? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,7 +27,7 @@ class ItemBottomDialog : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.addInfo.setOnClickListener {
-            findNavController().navigate(R.id.addServiceFragment)
+            onAddService?.invoke()
             dismiss()
         }
         binding.show.setOnClickListener{

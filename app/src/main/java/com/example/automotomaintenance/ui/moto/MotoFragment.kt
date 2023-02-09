@@ -8,7 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.automotomaintenance.R
+import com.example.automotomaintenance.adapter.ServiceCarAdapter
+import com.example.automotomaintenance.adapter.ServiceMotorBikeAdapter
 import com.example.automotomaintenance.databinding.FragmentMotoBinding
 import com.example.automotomaintenance.repository.FifeBaseRepository
 import com.example.automotomaintenance.ui.auto.AutoFragmentArgs
@@ -19,6 +22,7 @@ import javax.inject.Inject
 class MotoFragment : Fragment() {
 
     private val viewModel: MotoViewModel by viewModels()
+    private lateinit var adapterService: ServiceMotorBikeAdapter
     private lateinit var binding: FragmentMotoBinding
 
     @Inject
@@ -52,6 +56,15 @@ class MotoFragment : Fragment() {
 
         binding.back.setOnClickListener {
             findNavController().navigate(R.id.action_motoFragment_to_ListVehicleFragment)
+        }
+
+        adapterService = ServiceMotorBikeAdapter {
+
+        }
+        binding.listMoto.adapter = adapterService
+        binding.listMoto.layoutManager = LinearLayoutManager(requireContext())
+        viewModel.motoService.observe(viewLifecycleOwner) { listService ->
+            adapterService.submitList(listService)
         }
 
     }
