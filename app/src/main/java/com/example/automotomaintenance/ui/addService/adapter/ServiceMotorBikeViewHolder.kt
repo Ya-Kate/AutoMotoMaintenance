@@ -1,11 +1,12 @@
-package com.example.automotomaintenance.adapter
+package com.example.automotomaintenance.ui.addService.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.automotomaintenance.databinding.ItemServiceBinding
 import com.example.automotomaintenance.model.Service
 import com.example.automotomaintenance.util.getData
+import wu.seal.jsontokotlin.utils.getClassNameFromClassBlockString
 
-class ServiceCarViewHolder(private val binding: ItemServiceBinding) :
+class ServiceMotorBikeViewHolder(private val binding: ItemServiceBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(services: Service) {

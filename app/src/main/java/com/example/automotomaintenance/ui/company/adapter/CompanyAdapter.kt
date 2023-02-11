@@ -1,4 +1,4 @@
-package com.example.automotomaintenance.adapter
+package com.example.automotomaintenance.ui.company.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

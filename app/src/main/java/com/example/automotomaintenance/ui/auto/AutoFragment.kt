@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.automotomaintenance.R
-import com.example.automotomaintenance.adapter.ServiceCarAdapter
+import com.example.automotomaintenance.ui.addService.adapter.ServiceCarAdapter
 import com.example.automotomaintenance.databinding.FragmentAutoBinding
 import com.example.automotomaintenance.repository.FifeBaseRepository
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,30 +40,26 @@ class AutoFragment : Fragment() {
 
         val args: AutoFragmentArgs by navArgs()
         val number = args.autoArg
-        viewModel.getOneAuto(number)
-        viewModel.getAutoService(number)
+        viewModel.loadOneAuto(number)
+        viewModel.loadAutoService(number)
 
-        viewModel.oneAuto.observe(viewLifecycleOwner) { list ->
-            if (list.isNotEmpty()) {
-                list.subList(0, 0)
-                binding.brand.text = list[0].brand
-                binding.number.text = list[0].number
-                binding.year.text = list[0].year + ","
-                binding.volume.text = list[0].volume + "cc"
-            }
+        viewModel.infoOneAuto.observe(viewLifecycleOwner) { list ->
+            val info = list.first()
+                binding.brand.text = info.brand
+                binding.number.text = info.number
+                binding.year.text = info.year + ","
+                binding.volume.text = info.volume + "cc"
         }
+
         binding.back.setOnClickListener {
             findNavController().navigate(R.id.action_autoFragment_to_ListVehicleFragment)
         }
 
-        adapterService = ServiceCarAdapter {
-
-        }
+        adapterService = ServiceCarAdapter {}
         binding.listAuto.adapter = adapterService
         binding.listAuto.layoutManager = LinearLayoutManager(requireContext())
         viewModel.autoService.observe(viewLifecycleOwner) { listService ->
             adapterService.submitList(listService)
         }
-
     }
 }

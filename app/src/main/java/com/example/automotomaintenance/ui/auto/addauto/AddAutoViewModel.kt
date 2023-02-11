@@ -1,4 +1,4 @@
-package com.example.automotomaintenance.ui.addauto
+package com.example.automotomaintenance.ui.auto.addauto
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

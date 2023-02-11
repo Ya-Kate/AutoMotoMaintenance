@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">AutoMotoMaintenance</string>
     <string name="start">start</string>
     <string name="brand">brand</string>
@@ -33,8 +33,15 @@
     <string name="add_car_maintenance">add car \n maintenance</string>
     <string name="add_bike_maintenance">add bike \n maintenance</string>
     <string name="date">date</string>
-    <string name="text_km">%1$s km</string>
+    <string name="text_km">km</string>
     <string name="delete">Delete</string>
     <string name="add_info">Add info</string>
     <string name="show">SHOW</string>
+    <string name="edit">edit</string>
+    <string name="name_company">name company</string>
+    <string name="information">information</string>
+    <string name="phone">phone</string>
+    <string name="contact">contact</string>
+    <string name="address">address</string>
+
 </resources>

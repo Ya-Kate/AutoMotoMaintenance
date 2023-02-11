@@ -1,4 +1,4 @@
-package com.example.automotomaintenance.ui.addmoto
+package com.example.automotomaintenance.ui.moto.addmoto
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -39,6 +39,7 @@
             android:id="@+id/human"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp24"
             android:fontFamily="@font/ubuntu_regular"
             android:textColor="@color/black"
             android:textSize="@dimen/sp24" />
@@ -51,5 +52,11 @@
         android:fontFamily="@font/ubuntu_regular"
         android:textColor="@color/black"
         android:textSize="@dimen/sp24" />
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="wrap_content"
+        android:layout_height="3dp"
+        android:background="@drawable/separator" />
 
 </LinearLayout>

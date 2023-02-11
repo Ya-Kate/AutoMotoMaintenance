@@ -9,6 +9,7 @@ import com.example.automotomaintenance.repository.FifeBaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,15 +20,23 @@ class MotoViewModel @Inject constructor() : ViewModel() {
     val motorbike = MutableLiveData<List<Vehicle>>()
     val motoService = MutableLiveData<List<Service>>()
 
-    fun getOneMotorbike(number: String) {
+    fun infoOneMotorbike(number: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            motorbike.postValue(fifeBaseRepository.getOneMotorbike(number))
+            val motoInfo = fifeBaseRepository.getOneMotorbike(number)
+
+            withContext(Dispatchers.Main) {
+                motorbike.postValue(motoInfo)
+            }
         }
     }
 
     fun getMotoService(number: String) {
-        viewModelScope.launch (Dispatchers.IO){
-            motoService.postValue(fifeBaseRepository.getServiceCar(number))
+        viewModelScope.launch(Dispatchers.IO) {
+            val motoServices = fifeBaseRepository.getServiceMotorBike(number)
+
+            withContext(Dispatchers.Main) {
+                motoService.postValue(motoServices)
+            }
         }
     }
 }

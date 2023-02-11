@@ -1,4 +1,4 @@
-package com.example.automotomaintenance.adapter
+package com.example.automotomaintenance.ui.addService.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,11 +6,12 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.automotomaintenance.databinding.ItemServiceBinding
 import com.example.automotomaintenance.model.Service
 
-class ServiceMotorBikeAdapter(
+class ServiceCarAdapter(
     private val onClick: (service: String) -> Unit
-) : ListAdapter<Service, ServiceMotorBikeViewHolder>(ServiceDiffUtil()) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ServiceMotorBikeViewHolder {
-        return ServiceMotorBikeViewHolder(
+) : ListAdapter<Service, ServiceCarViewHolder>(ServiceDiffUtil()) {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ServiceCarViewHolder {
+        return ServiceCarViewHolder(
             ItemServiceBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -19,7 +20,7 @@ class ServiceMotorBikeAdapter(
         )
     }
 
-    override fun onBindViewHolder(holder: ServiceMotorBikeViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ServiceCarViewHolder, position: Int) {
         getItem(position)?.let { service ->
             holder.bind(getItem(position))
             holder.itemView.setOnClickListener {
@@ -27,5 +28,4 @@ class ServiceMotorBikeAdapter(
             }
         }
     }
-
 }

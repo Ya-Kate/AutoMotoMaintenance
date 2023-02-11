@@ -1,4 +1,4 @@
-package com.example.automotomaintenance.adapter
+package com.example.automotomaintenance.ui.company.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.automotomaintenance.model.Company

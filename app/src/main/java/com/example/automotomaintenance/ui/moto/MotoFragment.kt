@@ -10,11 +10,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.automotomaintenance.R
-import com.example.automotomaintenance.adapter.ServiceCarAdapter
-import com.example.automotomaintenance.adapter.ServiceMotorBikeAdapter
+import com.example.automotomaintenance.ui.addService.adapter.ServiceMotorBikeAdapter
 import com.example.automotomaintenance.databinding.FragmentMotoBinding
 import com.example.automotomaintenance.repository.FifeBaseRepository
-import com.example.automotomaintenance.ui.auto.AutoFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -42,30 +40,26 @@ class MotoFragment : Fragment() {
 
         val args: MotoFragmentArgs by navArgs()
         val number = args.motoArg
-        viewModel.getOneMotorbike(number)
+        viewModel.infoOneMotorbike(number)
+        viewModel.getMotoService(number)
 
         viewModel.motorbike.observe(viewLifecycleOwner) { list ->
-            if (list.isNotEmpty()) {
-                list.subList(0, 0)
-                binding.brand.text = list[0].brand
-                binding.number.text = list[0].number
-                binding.year.text = list[0].year + ","
-                binding.volume.text = list[0].volume + "cc"
-            }
+            val info = list.first()
+                binding.brand.text = info.brand
+                binding.number.text = info.number
+                binding.year.text = info.year + ","
+                binding.volume.text = info.volume + "cc"
         }
 
         binding.back.setOnClickListener {
             findNavController().navigate(R.id.action_motoFragment_to_ListVehicleFragment)
         }
 
-        adapterService = ServiceMotorBikeAdapter {
-
-        }
+        adapterService = ServiceMotorBikeAdapter {}
         binding.listMoto.adapter = adapterService
         binding.listMoto.layoutManager = LinearLayoutManager(requireContext())
         viewModel.motoService.observe(viewLifecycleOwner) { listService ->
             adapterService.submitList(listService)
         }
-
     }
 }

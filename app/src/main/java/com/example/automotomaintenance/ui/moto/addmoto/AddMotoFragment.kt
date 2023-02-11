@@ -1,4 +1,4 @@
-package com.example.automotomaintenance.ui.addmoto
+package com.example.automotomaintenance.ui.moto.addmoto
 
 import android.os.Bundle
 import android.view.LayoutInflater

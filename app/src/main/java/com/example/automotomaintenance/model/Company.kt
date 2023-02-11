@@ -15,8 +15,8 @@ data class Company(
     @ColumnInfo(name = "phone")
     var phone: String = "",
 
-    @ColumnInfo(name = "human")
-    var human: String = "",
+    @ColumnInfo(name = "person")
+    var person: String = "",
 
     @ColumnInfo(name = "address")
     var address: String = "",

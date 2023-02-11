@@ -1,7 +1,6 @@
 package com.example.automotomaintenance.ui.list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.automotomaintenance.ItemBottomDialog
-import com.example.automotomaintenance.adapter.CarAdapter
-import com.example.automotomaintenance.adapter.MotorBikeAdapter
+import com.example.automotomaintenance.bottomdialog.ItemBottomDialog
+import com.example.automotomaintenance.ui.auto.adapter.CarAdapter
+import com.example.automotomaintenance.ui.moto.adapter.MotorBikeAdapter
 import com.example.automotomaintenance.databinding.FragmentListVehicalBinding
 import com.example.automotomaintenance.repository.FifeBaseRepository
 import dagger.hilt.android.AndroidEntryPoint
@@ -84,7 +83,8 @@ class ListVehicleFragment @Inject constructor() :
                 onShowClicked = {
                     val action =
                         ListVehicleFragmentDirections.actionListVehicleFragmentToMotoFragment(
-                            numberMoto)
+                            numberMoto
+                        )
                     findNavController().navigate(action)
                 }
             }.show(childFragmentManager, "..")
@@ -95,6 +95,4 @@ class ListVehicleFragment @Inject constructor() :
             adapterMoto.submitList(it)
         }
     }
-
-
 }

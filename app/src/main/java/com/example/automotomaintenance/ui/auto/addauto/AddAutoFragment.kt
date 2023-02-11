@@ -1,4 +1,4 @@
-package com.example.automotomaintenance.ui.addauto
+package com.example.automotomaintenance.ui.auto.addauto
 
 import android.os.Bundle
 import android.view.LayoutInflater

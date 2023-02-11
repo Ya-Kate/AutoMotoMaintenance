@@ -176,6 +176,7 @@ class FifeBaseRepository @Inject constructor(
             .child(Firebase.auth.currentUser?.uid ?: "")
             .child("motorbike")
             .child(number)
+            .child("service")
             .child(UUID.randomUUID().toString())
             .setValue(
                 Service(
@@ -213,6 +214,50 @@ class FifeBaseRepository @Inject constructor(
                 }
             })
         return list
+    }
+
+    fun getServiceMotorBike(number: String): ArrayList<Service> {
+        val list = arrayListOf<Service>()
+        db.child("vehicle")
+            .child(Firebase.auth.currentUser?.uid ?: "")
+            .child("motorbike")
+            .child(number)
+            .child("service")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    snapshot.children.forEach {
+                        (it.getValue(Service::class.java))?.let { service ->
+                            list.add(service)
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    //
+                }
+            })
+        return list
+    }
+
+    fun addCompany(
+        name: String, information: String, phone: String, person: String, address: String
+    ) {
+        db.child("company")
+            .child(Firebase.auth.currentUser?.uid ?: "")
+            .child(UUID.randomUUID().toString())
+            .setValue(
+                Company(
+                    name, information, phone, person, address, Firebase.auth.currentUser?.uid ?: "",
+                )
+            ).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    //
+                } else {
+                    it.exception.let {
+                        //
+                    }
+                }
+            }
     }
 
     fun getCompany(onChange: (list: ArrayList<Company>) -> Unit) {

@@ -1,4 +1,4 @@
-package com.example.automotomaintenance.adapter
+package com.example.automotomaintenance.ui.company.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.automotomaintenance.databinding.ItemCompanyBinding
@@ -12,7 +12,7 @@ class CompanyViewHolder(private val binding: ItemCompanyBinding) :
             name.text = company.name
             information.text = company.information
             phone.text = company.phone
-            human.text = company.human
+            human.text = company.person
             address.text = company.address
         }
     }
