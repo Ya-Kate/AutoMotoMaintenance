@@ -45,7 +45,7 @@ class AddAutoFragment : Fragment() {
         }
 
         binding.back.setOnClickListener {
-            findNavController().navigate(R.id.action_addAutoFragment_to_AddVehiclesFragment)
+            findNavController().popBackStack()
         }
     }
 }

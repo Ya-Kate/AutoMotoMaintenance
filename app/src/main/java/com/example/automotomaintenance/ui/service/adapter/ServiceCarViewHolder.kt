@@ -1,4 +1,4 @@
-package com.example.automotomaintenance.ui.addService.adapter
+package com.example.automotomaintenance.ui.service.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.automotomaintenance.databinding.ItemServiceBinding

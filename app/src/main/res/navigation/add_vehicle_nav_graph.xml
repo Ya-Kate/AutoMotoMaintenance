@@ -19,18 +19,10 @@
     <fragment
         android:id="@+id/addAutoFragment"
         android:name="com.example.automotomaintenance.ui.auto.addauto.AddAutoFragment"
-        android:label="AddAutoFragment" >
-        <action
-            android:id="@+id/action_addAutoFragment_to_AddVehiclesFragment"
-            app:destination="@id/AddVehiclesFragment" />
-    </fragment>
+        android:label="AddAutoFragment" />
     <fragment
         android:id="@+id/addMotoFragment"
         android:name="com.example.automotomaintenance.ui.moto.addmoto.AddMotoFragment"
-        android:label="AddMotoFragment" >
-        <action
-            android:id="@+id/action_addMotoFragment_to_AddVehiclesFragment"
-            app:destination="@id/AddVehiclesFragment" />
-    </fragment>
+        android:label="AddMotoFragment" />
 
 </navigation>

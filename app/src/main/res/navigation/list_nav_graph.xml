@@ -31,9 +31,6 @@
             android:name="autoArg"
             android:defaultValue="No"
             app:argType="string" />
-        <action
-            android:id="@+id/action_autoFragment_to_ListVehicleFragment"
-            app:destination="@id/ListVehicleFragment" />
     </fragment>
 
     <fragment
@@ -44,18 +41,12 @@
             android:name="motoArg"
             android:defaultValue="No"
             app:argType="string" />
-        <action
-            android:id="@+id/action_motoFragment_to_ListVehicleFragment"
-            app:destination="@id/ListVehicleFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/addServiceFragment"
-        android:name="com.example.automotomaintenance.ui.addService.AddAutoServiceFragment"
+        android:name="com.example.automotomaintenance.ui.service.AddAutoServiceFragment"
         android:label="AddServiceFragment">
-        <action
-            android:id="@+id/action_addServiceFragment_to_ListVehicleFragment"
-            app:destination="@id/ListVehicleFragment" />
         <argument
             android:name="numberArg"
             android:defaultValue="No"
@@ -63,11 +54,8 @@
     </fragment>
     <fragment
         android:id="@+id/addMotoServiceFragment"
-        android:name="com.example.automotomaintenance.ui.addService.AddMotoServiceFragment"
+        android:name="com.example.automotomaintenance.ui.service.AddMotoServiceFragment"
         android:label="AddMotoServiceFragment" >
-        <action
-            android:id="@+id/action_addMotoServiceFragment_to_ListVehicleFragment"
-            app:destination="@id/ListVehicleFragment" />
         <argument
             android:name="numberArg"
             app:argType="string"

@@ -43,5 +43,8 @@
     <string name="phone">phone</string>
     <string name="contact">contact</string>
     <string name="address">address</string>
+    <string name="delete_">delete?</string>
+    <string name="no">no</string>
+    <string name="yes">yes</string>
 
 </resources>

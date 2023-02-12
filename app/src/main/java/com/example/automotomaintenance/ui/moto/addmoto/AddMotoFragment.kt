@@ -46,7 +46,7 @@ class AddMotoFragment : Fragment() {
         }
 
         binding.back.setOnClickListener {
-            findNavController().navigate(R.id.action_addMotoFragment_to_AddVehiclesFragment)
+            findNavController().popBackStack()
         }
     }
 }

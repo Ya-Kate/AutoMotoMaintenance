@@ -25,7 +25,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_add_text" />
+                android:background="@drawable/bg_add_text"
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
@@ -35,25 +36,25 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/choose_date"
-                android:background="@drawable/bg_add_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp35"
                 android:layout_marginTop="@dimen/dp24"
+                android:background="@drawable/bg_add_text"
                 android:hint="@string/choose_date"
-                app:endIconMode="clear_text"/>
+                app:endIconMode="clear_text" />
 
             <TextView
                 android:id="@+id/data"
-                android:background="@drawable/bg_add_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp24"
                 android:layout_marginTop="@dimen/dp24"
                 android:layout_marginEnd="@dimen/dp35"
+                android:background="@drawable/bg_add_text"
                 android:hint="@string/date"
                 android:textColor="@color/black"
-                app:endIconMode="clear_text"/>
+                app:endIconMode="clear_text" />
 
         </LinearLayout>
 
@@ -87,7 +88,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_add_text"
-                android:drawableEnd="@drawable/ic_dollar_24" />
+                android:drawableEnd="@drawable/ic_dollar_24"
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -114,7 +116,6 @@
             android:background="@drawable/bg_add"
             android:paddingStart="@dimen/dp40"
             android:paddingEnd="@dimen/dp40"
-            android:text="@string/add_car_maintenance"
-            />
+            android:text="@string/add_car_maintenance" />
     </LinearLayout>
 </ScrollView>

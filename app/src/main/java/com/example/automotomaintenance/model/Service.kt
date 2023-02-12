@@ -21,7 +21,7 @@ data class Service(
     var service: String = "",
 
     @ColumnInfo(name = "cost")
-    var cost: Int = 0,
+    var cost: String = "",
 
     @PrimaryKey(autoGenerate = true)
     var idUser: String = ""

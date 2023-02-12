@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.automotomaintenance.bottomdialog.ItemBottomDialog
+import com.example.automotomaintenance.bottomdialog.ItemYesNoDialog
 import com.example.automotomaintenance.ui.auto.adapter.CarAdapter
 import com.example.automotomaintenance.ui.moto.adapter.MotorBikeAdapter
 import com.example.automotomaintenance.databinding.FragmentListVehicalBinding
@@ -59,14 +60,23 @@ class ListVehicleFragment @Inject constructor() :
                         )
                     findNavController().navigate(action)
                 }
+
+                onDelete = {
+                    ItemYesNoDialog().apply {
+                        onYes = {
+                            fifeBaseRepository.deleteOneCar(numberAuto)
+                        }
+                    }.show(childFragmentManager, "..")
+                }
+
             }.show(childFragmentManager, "..")
+
         }
         binding.listAuto.adapter = adapterAuto
         binding.listAuto.layoutManager = LinearLayoutManager(requireContext())
         fifeBaseRepository.getCars {
             adapterAuto.submitList(it)
         }
-
 
         adapterMoto = MotorBikeAdapter {
             val numberMoto = it
@@ -87,6 +97,15 @@ class ListVehicleFragment @Inject constructor() :
                         )
                     findNavController().navigate(action)
                 }
+
+                onDelete = {
+                    ItemYesNoDialog().apply {
+                        onYes = {
+                            fifeBaseRepository.deleteOneMorbike(numberMoto)
+                        }
+                    }.show(childFragmentManager, "..")
+                }
+
             }.show(childFragmentManager, "..")
         }
         binding.listMoto.adapter = adapterMoto

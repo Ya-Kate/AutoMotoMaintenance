@@ -29,6 +29,7 @@ class CompanyBottomDialog : BottomSheetDialogFragment() {
             onDeleteCompany?.invoke()
             dismiss()
         }
+
         binding.edit.setOnClickListener{
             onEditCompany?.invoke()
             dismiss()

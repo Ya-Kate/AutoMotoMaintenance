@@ -47,7 +47,7 @@ class AddCompanyFragment : Fragment() {
         }
 
         binding.back.setOnClickListener{
-            findNavController().navigate(R.id.action_addCompanyFragment_to_CompanyFragment)
+            findNavController().popBackStack()
         }
 
     }

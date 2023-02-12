@@ -1,4 +1,4 @@
-package com.example.automotomaintenance.ui.addService
+package com.example.automotomaintenance.ui.service
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,7 +15,7 @@ class AddMotoServiceViewModel @Inject constructor(private val repository: FifeBa
 
     private var motoServiceAdded: (() -> Unit)? = null
 
-    fun addMotoService(km: Int, data: Date, service: String, cost: Int, number: String) {
+    fun addMotoService(km: Int, data: Date, service: String, cost: String, number: String) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addServiceMotorBike(km, data, service, cost, number)
             motoServiceAdded?.invoke()

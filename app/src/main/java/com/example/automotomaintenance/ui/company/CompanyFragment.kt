@@ -39,22 +39,15 @@ class CompanyFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapterCompany = CompanyAdapter {
+            val nameCompany = it
 
             CompanyBottomDialog().apply {
                 onDeleteCompany = {
-//                    val action =
-//                        ListVehicleFragmentDirections.actionListVehicleFragmentToAddServiceFragment(
-//                            numberAuto
-//                        )
-//                    findNavController().navigate(action)
+                    fifeBaseRepository.deleteCompany(nameCompany)
                 }
 
                 onEditCompany = {
-//                    val action =
-//                        ListVehicleFragmentDirections.actionListVehicleFragmentToAutoFragment(
-//                            numberAuto
-//                        )
-//                    findNavController().navigate(action)
+
                 }
             }.show(childFragmentManager, "..")
         }

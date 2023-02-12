@@ -12,6 +12,7 @@ class ItemBottomDialog : BottomSheetDialogFragment() {
     private lateinit var binding: DialogItemBinding
     var onShowClicked: (() -> Unit)? = null
     var onAddService: (() -> Unit)? = null
+    var onDelete: (() -> Unit)? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,10 +30,14 @@ class ItemBottomDialog : BottomSheetDialogFragment() {
             onAddService?.invoke()
             dismiss()
         }
-        binding.show.setOnClickListener{
+        binding.show.setOnClickListener {
             onShowClicked?.invoke()
             dismiss()
         }
-    }
 
+        binding.delete.setOnClickListener {
+            onDelete?.invoke()
+//            dismiss()
+        }
+    }
 }

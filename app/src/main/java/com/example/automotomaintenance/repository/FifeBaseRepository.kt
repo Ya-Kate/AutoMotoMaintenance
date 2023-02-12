@@ -9,7 +9,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.NonCancellable.children
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -147,7 +149,7 @@ class FifeBaseRepository @Inject constructor(
         return motoInfo
     }
 
-    fun addServiceCar(km: Int, data: Date, service: String, cost: Int, number: String) {
+    fun addServiceCar(km: Int, data: Date, service: String, cost: String, number: String) {
 
         db.child("vehicle")
             .child(Firebase.auth.currentUser?.uid ?: "")
@@ -170,7 +172,7 @@ class FifeBaseRepository @Inject constructor(
             }
     }
 
-    fun addServiceMotorBike(km: Int, data: Date, service: String, cost: Int, number: String) {
+    fun addServiceMotorBike(km: Int, data: Date, service: String, cost: String, number: String) {
 
         db.child("vehicle")
             .child(Firebase.auth.currentUser?.uid ?: "")
@@ -208,7 +210,6 @@ class FifeBaseRepository @Inject constructor(
                         }
                     }
                 }
-
                 override fun onCancelled(error: DatabaseError) {
                     //
                 }
@@ -244,7 +245,7 @@ class FifeBaseRepository @Inject constructor(
     ) {
         db.child("company")
             .child(Firebase.auth.currentUser?.uid ?: "")
-            .child(UUID.randomUUID().toString())
+            .child(name)
             .setValue(
                 Company(
                     name, information, phone, person, address, Firebase.auth.currentUser?.uid ?: "",
@@ -278,5 +279,28 @@ class FifeBaseRepository @Inject constructor(
                     //
                 }
             })
+    }
+
+    fun deleteOneCar(numberAuto: String) {
+        db.child("vehicle")
+            .child(Firebase.auth.currentUser?.uid ?: "")
+            .child("car")
+            .child(numberAuto)
+            .removeValue()
+    }
+
+    fun deleteOneMorbike(numberMoto: String) {
+        db.child("vehicle")
+            .child(Firebase.auth.currentUser?.uid ?: "")
+            .child("motorbike")
+            .child(numberMoto)
+            .removeValue()
+    }
+
+    fun deleteCompany(nameCompany: String) {
+        db.child("company")
+            .child(Firebase.auth.currentUser?.uid ?: "")
+            .child(nameCompany)
+            .removeValue()
     }
 }

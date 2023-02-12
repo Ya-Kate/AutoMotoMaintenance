@@ -9,8 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.automotomaintenance.R
-import com.example.automotomaintenance.ui.addService.adapter.ServiceMotorBikeAdapter
+import com.example.automotomaintenance.ui.service.adapter.ServiceMotorBikeAdapter
 import com.example.automotomaintenance.databinding.FragmentMotoBinding
 import com.example.automotomaintenance.repository.FifeBaseRepository
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,7 +51,7 @@ class MotoFragment : Fragment() {
         }
 
         binding.back.setOnClickListener {
-            findNavController().navigate(R.id.action_motoFragment_to_ListVehicleFragment)
+            findNavController().popBackStack()
         }
 
         adapterService = ServiceMotorBikeAdapter {}
