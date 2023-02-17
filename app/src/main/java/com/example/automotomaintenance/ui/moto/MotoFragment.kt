@@ -62,3 +62,4 @@ class MotoFragment : Fragment() {
         }
     }
 }
+

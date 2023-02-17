@@ -35,7 +35,6 @@ class AuthRepository @Inject constructor() {
                 task.exception?.let { onError(it) }
             }
         }
-
     }
 
     fun register(
@@ -50,6 +49,5 @@ class AuthRepository @Inject constructor() {
                 task.exception?.let { onError(it) }
             }
         }
-
     }
 }

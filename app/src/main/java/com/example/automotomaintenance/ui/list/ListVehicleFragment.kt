@@ -109,6 +109,7 @@ class ListVehicleFragment @Inject constructor() :
                         }
                         dialog.show(childFragmentManager, "..")
                     }
+
                 }
 
             }.show(childFragmentManager, "..")

@@ -84,3 +84,4 @@ class RegisterFragment @Inject constructor() : Fragment() {
         animation.start()
     }
 }
+

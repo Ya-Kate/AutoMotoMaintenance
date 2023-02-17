@@ -233,5 +233,4 @@ private fun FragmentManager.isOnBackStack(backStackName: String): Boolean {
     }
     return false
 }
-
 private fun getFragmentTag(index: Int) = "bottomNavigation#$index"

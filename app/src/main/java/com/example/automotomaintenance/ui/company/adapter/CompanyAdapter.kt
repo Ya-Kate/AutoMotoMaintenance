@@ -27,5 +27,4 @@ class CompanyAdapter(private val onClick: (name: String) -> Unit) :
             }
         }
     }
-
 }

@@ -57,7 +57,6 @@ class NavigationMainFragment : Fragment(R.layout.fragment_navigation_main) {
     fun getSupportActionBar () {
         binding.bottomNavigation.height
     }
-
 }
 
 

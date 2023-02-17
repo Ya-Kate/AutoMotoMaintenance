@@ -30,6 +30,7 @@ class CompanyBottomDialog : BottomSheetDialogFragment() {
             dismiss()
         }
 
+
         binding.edit.setOnClickListener{
             onEditCompany?.invoke()
             dismiss()

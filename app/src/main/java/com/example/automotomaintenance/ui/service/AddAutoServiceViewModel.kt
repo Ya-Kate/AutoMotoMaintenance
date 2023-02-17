@@ -21,5 +21,4 @@ class AddAutoServiceViewModel @Inject constructor(private val repository: FifeBa
             autoServiceAdded?.invoke()
         }
     }
-
 }

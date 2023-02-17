@@ -63,5 +63,6 @@ class AddAutoFragment : Fragment() {
         binding.back.setOnClickListener {
             findNavController().popBackStack()
         }
+
     }
 }

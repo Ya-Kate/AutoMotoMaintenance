@@ -230,7 +230,6 @@ class FifeBaseRepository @Inject constructor(
                         }
                     }
                 }
-
                 override fun onCancelled(error: DatabaseError) {
                     //
                 }

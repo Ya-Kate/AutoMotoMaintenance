@@ -18,6 +18,7 @@ class CarAdapter(
                 false
             )
         )
+
     }
 
     override fun onBindViewHolder(holder: CarViewHolder, position: Int) {

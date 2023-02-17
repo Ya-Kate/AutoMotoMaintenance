@@ -62,7 +62,6 @@ class AutoFragment : Fragment() {
                 }
 
                 onEditCompany = {
-
                 }
             }.show(childFragmentManager, "..")
 

@@ -37,7 +37,6 @@ class ItemBottomDialog : BottomSheetDialogFragment() {
 
         binding.delete.setOnClickListener {
             onDelete?.invoke()
-//            dismiss()
         }
     }
 }

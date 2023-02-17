@@ -60,6 +60,5 @@ class AddCompanyFragment : Fragment() {
         binding.back.setOnClickListener {
             findNavController().popBackStack()
         }
-
     }
 }

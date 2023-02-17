@@ -23,4 +23,5 @@ data class Company(
 
     @PrimaryKey(autoGenerate = true)
     var idUser: String = ""
+
 )

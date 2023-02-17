@@ -26,3 +26,4 @@ data class Service(
     @PrimaryKey(autoGenerate = true)
     var idUser: String = ""
 )
+
