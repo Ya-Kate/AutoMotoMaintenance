@@ -32,6 +32,12 @@
         android:name="com.example.automotomaintenance.NavigationMainFragment"
         android:label="fragment_navigation_main"
         tools:layout="@layout/fragment_navigation_main" />
+    <action
+        android:id="@+id/action_global_registerFragment"
+        app:destination="@id/registerFragment"
+        app:popUpTo="@id/startProjectFragment"
+        app:popUpToInclusive="true"
+        app:launchSingleTop="false"/>
 
 
 </navigation>

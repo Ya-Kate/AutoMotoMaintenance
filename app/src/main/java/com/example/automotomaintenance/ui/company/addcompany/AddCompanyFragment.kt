@@ -1,9 +1,11 @@
 package com.example.automotomaintenance.ui.company.addcompany
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -30,23 +32,32 @@ class AddCompanyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.addInfo.setOnClickListener{
+        binding.addInfo.setOnClickListener {
             val name = binding.name.editText?.text.toString()
             val information = binding.information.editText?.text.toString()
             val phone = binding.phone.editText?.text.toString()
             val person = binding.person.editText?.text.toString()
             val address = binding.address.editText?.text.toString()
 
-            viewModel.addCompany(name, information, phone, person, address)
+            if (name == "" || information == "" || phone == "") {
+                val toast: Toast =
+                    Toast.makeText(requireContext(), "NOT BE EMPTY", Toast.LENGTH_LONG)
+                toast.setGravity(Gravity.CENTER, 0, 0)
+                toast.verticalMargin
+                toast.show()
+            } else {
+                viewModel.addCompany(name, information, phone, person, address)
 
-            binding.name.editText?.text = null
-            binding.information.editText?.text = null
-            binding.phone.editText?.text = null
-            binding.person.editText?.text = null
-            binding.address.editText?.text = null
+                binding.name.editText?.text = null
+                binding.information.editText?.text = null
+                binding.phone.editText?.text = null
+                binding.person.editText?.text = null
+                binding.address.editText?.text = null
+            }
+
         }
 
-        binding.back.setOnClickListener{
+        binding.back.setOnClickListener {
             findNavController().popBackStack()
         }
 

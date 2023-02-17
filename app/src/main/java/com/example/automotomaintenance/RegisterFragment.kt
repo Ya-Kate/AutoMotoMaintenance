@@ -31,40 +31,56 @@ class RegisterFragment @Inject constructor() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var inputText = ""
+
         binding.loginButton.setOnClickListener {
-            authRepository.login(
-                binding.email.editText?.text.toString().trim(),
-                binding.password.editText?.text.toString().trim(), {
-                    findNavController().navigate(R.id.action_registerFragment_to_navigationMainFragment)
-                }, {
-                    binding.errorText.text = it.toString()
-                    val animation = ValueAnimator.ofFloat(1F, 0F)
-                    animation.addUpdateListener { value ->
-                        binding.errorText.alpha = value.animatedValue as Float
+
+            val email = binding.email.editText?.text.toString()
+            val password = binding.password.editText?.text.toString()
+            if (email == "" || password == "") {
+                inputText = "NOT BE EMPTY"
+                showException(inputText)
+            } else {
+                authRepository.login(
+                    email.trim(),
+                    password.trim(), {
+                        findNavController().navigate(R.id.action_registerFragment_to_navigationMainFragment)
+                    }, { exception ->
+                        inputText = exception.toString()
+                        showException(inputText)
                     }
-                    animation.duration = 3000
-                    animation.start()
-                }
-            )
+                )
+            }
         }
 
         binding.registerButton.setOnClickListener {
-            authRepository.register(
-                binding.email.editText?.text.toString().trim(),
-                binding.password.editText?.text.toString().trim(), {
-                    findNavController().navigate(R.id.action_registerFragment_to_navigationMainFragment)
-                }, {
-                    binding.errorText.text = it.toString()
-                    val animation = ValueAnimator.ofFloat(1F, 0F)
-                    animation.addUpdateListener { value ->
-                        binding.errorText.alpha = value.animatedValue as Float
 
+            val email = binding.email.editText?.text.toString()
+            val password = binding.password.editText?.text.toString()
+            if (email == "" || password == "") {
+                inputText = "NOT BE EMPTY"
+                showException(inputText)
+            } else {
+                authRepository.register(
+                    email.trim(),
+                    password.trim(), {
+                        findNavController().navigate(R.id.action_registerFragment_to_navigationMainFragment)
+                    }, { exception ->
+                        inputText = exception.toString()
+                        showException(inputText)
                     }
-                    animation.duration = 3000
-                    animation.start()
-                }
-            )
+                )
+            }
         }
+    }
 
+    fun showException(value: String) {
+        binding.errorText.text = value
+        val animation = ValueAnimator.ofFloat(1F, 0F)
+        animation.addUpdateListener { values ->
+            binding.errorText.alpha = values.animatedValue as Float
+        }
+        animation.duration = 3000
+        animation.start()
     }
 }

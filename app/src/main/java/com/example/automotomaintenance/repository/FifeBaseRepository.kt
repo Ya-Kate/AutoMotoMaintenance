@@ -9,12 +9,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.NonCancellable.children
+import wu.seal.jsontokotlin.feedback.configLogUrl
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 class FifeBaseRepository @Inject constructor(
 ) {
@@ -289,7 +287,7 @@ class FifeBaseRepository @Inject constructor(
             .removeValue()
     }
 
-    fun deleteOneMorbike(numberMoto: String) {
+    fun deleteOneMotorbike(numberMoto: String) {
         db.child("vehicle")
             .child(Firebase.auth.currentUser?.uid ?: "")
             .child("motorbike")
@@ -302,5 +300,33 @@ class FifeBaseRepository @Inject constructor(
             .child(Firebase.auth.currentUser?.uid ?: "")
             .child(nameCompany)
             .removeValue()
+    }
+
+    fun deleteServiceCar(nameService: String, number:String) {
+        db.child("vehicle")
+            .child(Firebase.auth.currentUser?.uid ?: "")
+            .child("car")
+            .child(number)
+            .child("service")
+        (object : ValueEventListener, DatabaseReference.CompletionListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    snapshot.children.forEach {
+                        (it.getValue(Service::class.java))?.let { service ->
+                            if(service.service == nameService) {
+//                                как правильно удалить одну заметку из fireBase
+
+                            }
+                        }
+                    }
+                }
+                override fun onCancelled(error: DatabaseError) {
+                    //
+                }
+
+                override fun onComplete(error: DatabaseError?, ref: DatabaseReference) {
+                    //
+                }
+            })
+
     }
 }

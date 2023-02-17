@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.automotomaintenance.databinding.FragmentAddVehicleBinding
 import com.example.automotomaintenance.repository.AuthRepository
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -35,7 +36,7 @@ class AddVehiclesFragment : Fragment() {
 
         binding.logout.setOnClickListener {
             authRepository.logout()
-//            findNavController().navigate(R.id.action_addVehiclesFragment_to_)
+            route()
         }
 
         binding.addVehicle.setOnClickListener {
@@ -56,5 +57,11 @@ class AddVehiclesFragment : Fragment() {
         binding.addMoto.setOnClickListener {
             findNavController().navigate(R.id.action_AddVehiclesFragment_to_addMotoFragment)
         }
+    }
+
+    fun route() {
+        val navController = findNavController()
+        navController.setGraph(R.navigation.main_nav_graph)
+        navController.navigate(R.id.action_global_registerFragment)
     }
 }

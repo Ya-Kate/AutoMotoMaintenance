@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.automotomaintenance.bottomdialog.ItemBottomDialog
-import com.example.automotomaintenance.bottomdialog.ItemYesNoDialog
+import com.example.automotomaintenance.bottomdialog.ItemDeleteDialog
 import com.example.automotomaintenance.ui.auto.adapter.CarAdapter
 import com.example.automotomaintenance.ui.moto.adapter.MotorBikeAdapter
 import com.example.automotomaintenance.databinding.FragmentListVehicalBinding
@@ -25,6 +25,7 @@ class ListVehicleFragment @Inject constructor() :
     private lateinit var adapterAuto: CarAdapter
     private lateinit var adapterMoto: MotorBikeAdapter
     private val viewModel: ListVehicleViewModel by viewModels()
+    private var deleteDialog: ItemDeleteDialog? = null
 
     @Inject
     lateinit var fifeBaseRepository: FifeBaseRepository
@@ -43,7 +44,6 @@ class ListVehicleFragment @Inject constructor() :
 
         adapterAuto = CarAdapter {
             val numberAuto = it
-
             ItemBottomDialog().apply {
                 onAddService = {
                     val action =
@@ -61,16 +61,19 @@ class ListVehicleFragment @Inject constructor() :
                     findNavController().navigate(action)
                 }
 
+
                 onDelete = {
-                    ItemYesNoDialog().apply {
-                        onYes = {
+                    deleteDialog = ItemDeleteDialog()
+                    deleteDialog?.let { dialog ->
+                        dialog.onSuccess = {
                             fifeBaseRepository.deleteOneCar(numberAuto)
+                            this.dismiss()
                         }
-                    }.show(childFragmentManager, "..")
+                        dialog.show(childFragmentManager, "..")
+                    }
+
                 }
-
             }.show(childFragmentManager, "..")
-
         }
         binding.listAuto.adapter = adapterAuto
         binding.listAuto.layoutManager = LinearLayoutManager(requireContext())
@@ -80,7 +83,6 @@ class ListVehicleFragment @Inject constructor() :
 
         adapterMoto = MotorBikeAdapter {
             val numberMoto = it
-
             ItemBottomDialog().apply {
                 onAddService = {
                     val action =
@@ -99,11 +101,14 @@ class ListVehicleFragment @Inject constructor() :
                 }
 
                 onDelete = {
-                    ItemYesNoDialog().apply {
-                        onYes = {
-                            fifeBaseRepository.deleteOneMorbike(numberMoto)
+                    deleteDialog = ItemDeleteDialog()
+                    deleteDialog?.let { dialog ->
+                        dialog.onSuccess = {
+                            fifeBaseRepository.deleteOneMotorbike(numberMoto)
+                            this.dismiss()
                         }
-                    }.show(childFragmentManager, "..")
+                        dialog.show(childFragmentManager, "..")
+                    }
                 }
 
             }.show(childFragmentManager, "..")

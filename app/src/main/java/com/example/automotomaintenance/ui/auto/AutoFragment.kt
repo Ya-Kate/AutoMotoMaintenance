@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.automotomaintenance.bottomdialog.CompanyBottomDialog
 import com.example.automotomaintenance.ui.service.adapter.ServiceCarAdapter
 import com.example.automotomaintenance.databinding.FragmentAutoBinding
 import com.example.automotomaintenance.repository.FifeBaseRepository
@@ -44,17 +45,28 @@ class AutoFragment : Fragment() {
 
         viewModel.infoOneAuto.observe(viewLifecycleOwner) { list ->
             val info = list.first()
-                binding.brand.text = info.brand
-                binding.number.text = info.number
-                binding.year.text = info.year + ","
-                binding.volume.text = info.volume + "cc"
+            binding.brand.text = info.brand
+            binding.number.text = info.number
+            binding.year.text = info.year + ","
+            binding.volume.text = info.volume + "cc"
         }
 
         binding.back.setOnClickListener {
             findNavController().popBackStack()
         }
 
-        adapterService = ServiceCarAdapter {}
+        adapterService = ServiceCarAdapter { nameService ->
+            CompanyBottomDialog().apply {
+                onDeleteCompany = {
+                    fifeBaseRepository.deleteServiceCar(nameService, number)
+                }
+
+                onEditCompany = {
+
+                }
+            }.show(childFragmentManager, "..")
+
+        }
         binding.listAuto.adapter = adapterService
         binding.listAuto.layoutManager = LinearLayoutManager(requireContext())
         viewModel.autoService.observe(viewLifecycleOwner) { listService ->
