@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+
+            <corners android:radius="@dimen/dp15" />
+
+            <gradient
+                android:angle="90"
+                android:endColor="@color/bg_button_text_end"
+                android:startColor="@color/bg_button_text_start"
+                android:type="linear" />
+
+            <stroke
+                android:width="@dimen/dp1"
+                android:color="@color/bg_button_text_stroke" />
+
+            <padding
+                android:bottom="@dimen/dp15"
+                android:left="@dimen/dp15"
+                android:right="@dimen/dp15"
+                android:top="@dimen/dp15" />
+        </shape>
+    </item>
+</selector>

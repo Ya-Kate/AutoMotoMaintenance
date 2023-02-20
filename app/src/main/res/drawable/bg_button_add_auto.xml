@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape>
+            <solid android:color="@color/bg_navigation"/>
+            <corners
+                android:bottomRightRadius="30.1dip"
+                android:bottomLeftRadius="10.1dip"
+                android:topLeftRadius="30.1dip"
+                android:topRightRadius="0.0dip"/>
+        </shape>
+    </item>
+</selector>

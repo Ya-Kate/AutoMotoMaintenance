@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape>
+            <solid android:color="@color/bg_button_add"/>
+            <corners android:bottomRightRadius="@dimen/dip30"
+                android:bottomLeftRadius="@dimen/dip0_1"
+                android:topLeftRadius="@dimen/dip30"
+                android:topRightRadius="@dimen/dip0_1"/>
+            <stroke
+                android:width="@dimen/dp1"
+                android:color="@color/bg_add" />
+        </shape>
+    </item>
+
+</selector>

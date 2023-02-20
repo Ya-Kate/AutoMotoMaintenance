@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/company"
+    app:startDestination="@id/CompanyFragment">
+
+    <fragment
+        android:id="@+id/CompanyFragment"
+        android:name="com.example.automotomaintenance.ui.company.CompanyFragment"
+        android:label="CompanyFragment" >
+        <action
+            android:id="@+id/action_CompanyFragment_to_addCompanyFragment"
+            app:destination="@id/addCompanyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCompanyFragment"
+        android:name="com.example.automotomaintenance.ui.company.addcompany.AddCompanyFragment"
+        android:label="AddCompanyFragment" />
+</navigation>
