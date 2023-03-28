@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.automotomaintenance.R
+import com.example.automotomaintenance.bottomdialog.ItemCompanyBottomDialog
 import com.example.automotomaintenance.ui.service.adapter.ServiceMotorBikeAdapter
 import com.example.automotomaintenance.databinding.FragmentMotoBinding
 import com.example.automotomaintenance.repository.FifeBaseRepository
@@ -38,26 +40,42 @@ class MotoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val args: MotoFragmentArgs by navArgs()
-        val number = args.motoArg
-        viewModel.infoOneMotorbike(number)
-        viewModel.getMotoService(number)
+        val idMoto = args.motoArg
+        viewModel.loadOneMotorbike(idMoto)
+        viewModel.loadServicesMotorBike(idMoto)
 
-        viewModel.motorbike.observe(viewLifecycleOwner) { list ->
+        viewModel.infoOneMotorBike.observe(viewLifecycleOwner) { list ->
             val info = list.first()
-                binding.brand.text = info.brand
-                binding.number.text = info.number
-                binding.year.text = info.year + ","
-                binding.volume.text = info.volume + "cc"
+            binding.brand.text = info.brand
+            binding.number.text = info.number
+            binding.year.text = getString(R.string.comma, info.year)
+            binding.volume.text = getString(R.string.cc, info.volume)
         }
 
         binding.back.setOnClickListener {
             findNavController().popBackStack()
         }
 
-        adapterService = ServiceMotorBikeAdapter {}
+        adapterService = ServiceMotorBikeAdapter { idService ->
+            ItemCompanyBottomDialog().apply {
+                onDelete = {
+                    fifeBaseRepository.deleteServiceMotorBike(idService, idMoto)
+                    viewModel.loadServicesMotorBike(idMoto)
+                }
+
+                onEdit = {
+                    val action = MotoFragmentDirections.actionMotoFragmentToNoteServiceMoto(
+                        idMoto,
+                        idService
+                    )
+                    findNavController().navigate(action)
+                    this.dismiss()
+                }
+            }.show(childFragmentManager, "..")
+        }
         binding.listMoto.adapter = adapterService
         binding.listMoto.layoutManager = LinearLayoutManager(requireContext())
-        viewModel.motoService.observe(viewLifecycleOwner) { listService ->
+        viewModel.motoServices.observe(viewLifecycleOwner) { listService ->
             adapterService.submitList(listService)
         }
     }

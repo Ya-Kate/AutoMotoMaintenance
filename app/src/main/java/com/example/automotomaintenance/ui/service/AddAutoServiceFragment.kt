@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.automotomaintenance.R
 import com.example.automotomaintenance.databinding.FragmentAddAutoServiceBinding
 import com.example.automotomaintenance.util.getData
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,7 +36,7 @@ class AddAutoServiceFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val args: AddAutoServiceFragmentArgs by navArgs()
-        val number: String = args.numberArg
+        val id: String = args.numberArg
 
         binding.back.setOnClickListener {
             findNavController().popBackStack()
@@ -66,17 +68,28 @@ class AddAutoServiceFragment : Fragment() {
         })
 
         binding.addInfo.setOnClickListener {
-            val km: Int = binding.km.editText?.text.toString().toInt()
-            val date: Date = dataService
-            val service: String = binding.service.editText?.text.toString()
-            val cost: String = binding.cost.editText?.text.toString()
 
-            viewModel.addAutoService(km, date, service, cost, number)
+                val kmEdit: String = binding.km.editText?.text.toString()
+                val date: Date = dataService
+                val service: String = binding.service.editText?.text.toString()
+                val cost: String = binding.cost.editText?.text.toString()
 
-            binding.km.editText?.text = null
-            binding.data.text = null
-            binding.service.editText?.text = null
-            binding.cost.editText?.text = null
+                if (kmEdit.isBlank() || service.isBlank()) {
+                    val toast: Toast = Toast.makeText(
+                        requireContext(),
+                        R.string.not_empty_service,
+                        Toast.LENGTH_LONG
+                    )
+                    toast.show()
+                } else {
+                    val km = kmEdit.toInt()
+                    viewModel.addAutoService(km, date, service, cost, id)
+
+                    binding.km.editText?.text = null
+                    binding.data.text = null
+                    binding.service.editText?.text = null
+                    binding.cost.editText?.text = null
+                }
         }
     }
 }

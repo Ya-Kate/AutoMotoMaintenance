@@ -15,9 +15,9 @@ class AddMotoServiceViewModel @Inject constructor(private val repository: FifeBa
 
     private var motoServiceAdded: (() -> Unit)? = null
 
-    fun addMotoService(km: Int, data: Date, service: String, cost: String, number: String) {
+    fun addMotoService(km: Int, data: Date, service: String, cost: String, id: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addServiceMotorBike(km, data, service, cost, number)
+            repository.addServiceMotorBike(km, data, service, cost, id)
             motoServiceAdded?.invoke()
         }
     }

@@ -9,7 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.automotomaintenance.bottomdialog.CompanyBottomDialog
+import com.example.automotomaintenance.R
+import com.example.automotomaintenance.bottomdialog.ItemCompanyBottomDialog
 import com.example.automotomaintenance.ui.service.adapter.ServiceCarAdapter
 import com.example.automotomaintenance.databinding.FragmentAutoBinding
 import com.example.automotomaintenance.repository.FifeBaseRepository
@@ -39,37 +40,44 @@ class AutoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val args: AutoFragmentArgs by navArgs()
-        val number = args.autoArg
-        viewModel.loadOneAuto(number)
-        viewModel.loadAutoService(number)
+        val idCar = args.autoArg
+
+        viewModel.loadOneAuto(idCar)
+        viewModel.loadAutoServices(idCar)
 
         viewModel.infoOneAuto.observe(viewLifecycleOwner) { list ->
             val info = list.first()
             binding.brand.text = info.brand
             binding.number.text = info.number
-            binding.year.text = info.year + ","
-            binding.volume.text = info.volume + "cc"
+            binding.year.text = getString(R.string.comma, info.year)
+            binding.volume.text = getString(R.string.cc, info.volume)
         }
 
         binding.back.setOnClickListener {
             findNavController().popBackStack()
         }
 
-        adapterService = ServiceCarAdapter { nameService ->
-            CompanyBottomDialog().apply {
-                onDeleteCompany = {
-                    fifeBaseRepository.deleteServiceCar(nameService, number)
+        adapterService = ServiceCarAdapter { idService ->
+
+            ItemCompanyBottomDialog().apply {
+                onDelete = {
+                    viewModel.deleteServiceCar(idService, idCar)
+                    viewModel.loadAutoServices(idCar)
                 }
 
-                onEditCompany = {
+                onEdit = {
+                    val action =
+                        AutoFragmentDirections.actionAutoFragmentToServiceNoteCar(idCar, idService)
+                    findNavController().navigate(action)
+                    this.dismiss()
                 }
             }.show(childFragmentManager, "..")
 
         }
         binding.listAuto.adapter = adapterService
         binding.listAuto.layoutManager = LinearLayoutManager(requireContext())
-        viewModel.autoService.observe(viewLifecycleOwner) { listService ->
-            adapterService.submitList(listService)
+        viewModel.autoServices.observe(viewLifecycleOwner) { listServices ->
+            adapterService.submitList(listServices)
         }
     }
 }

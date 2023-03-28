@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -37,12 +38,18 @@ class AddMotoFragment : Fragment() {
             val year = binding.year.editText?.text.toString()
             val volume = binding.volume.editText?.text.toString()
 
-            viewModel.addMoto(brand, number, year, volume)
+            if(brand.isBlank() || number.isBlank() || year.isBlank()) {
+                val toast: Toast = Toast.makeText(requireContext(), R.string.not_empty_add_transport, Toast.LENGTH_LONG)
+                toast.show()
+            }
+            else{
+                viewModel.addMoto(brand, number, year, volume)
 
-            binding.brand.editText?.text = null
-            binding.number.editText?.text = null
-            binding.year.editText?.text = null
-            binding.volume.editText?.text = null
+                binding.brand.editText?.text = null
+                binding.number.editText?.text = null
+                binding.year.editText?.text = null
+                binding.volume.editText?.text = null
+            }
         }
 
         binding.back.setOnClickListener {

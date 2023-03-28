@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.automotomaintenance.RegisterFragment"
+        android:name="com.example.automotomaintenance.ui.start.RegisterFragment"
         android:label="RegisterFragment"
         >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/startProjectFragment"
-        android:name="com.example.automotomaintenance.StartProjectFragment"
+        android:name="com.example.automotomaintenance.ui.start.StartProjectFragment"
         android:label="StartProjectFragment" >
         <action
             android:id="@+id/action_startProjectFragment2_to_registerFragment"
@@ -36,8 +36,10 @@
         android:id="@+id/action_global_registerFragment"
         app:destination="@id/registerFragment"
         app:popUpTo="@id/startProjectFragment"
-        app:popUpToInclusive="true"
-        app:launchSingleTop="false"/>
+
+        android:clearTaskOnLaunch="true"
+        android:allowTaskReparenting="true"
+        />
 
 
 </navigation>

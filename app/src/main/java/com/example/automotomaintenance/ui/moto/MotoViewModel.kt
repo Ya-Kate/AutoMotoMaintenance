@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.automotomaintenance.model.Service
-import com.example.automotomaintenance.model.Vehicle
+import com.example.automotomaintenance.model.TransportVehicle
 import com.example.automotomaintenance.repository.FifeBaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -17,25 +17,25 @@ class MotoViewModel @Inject constructor() : ViewModel() {
 
     @Inject
     lateinit var fifeBaseRepository: FifeBaseRepository
-    val motorbike = MutableLiveData<List<Vehicle>>()
-    val motoService = MutableLiveData<List<Service>>()
+    val infoOneMotorBike = MutableLiveData<List<TransportVehicle>>()
+    val motoServices = MutableLiveData<List<Service>>()
 
-    fun infoOneMotorbike(number: String) {
+    fun loadOneMotorbike(idMoto: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val motoInfo = fifeBaseRepository.getOneMotorbike(number)
+            val motoInfo = fifeBaseRepository.loadOneMotorbike(idMoto)
 
             withContext(Dispatchers.Main) {
-                motorbike.postValue(motoInfo)
+                infoOneMotorBike.postValue(motoInfo)
             }
         }
     }
 
-    fun getMotoService(number: String) {
+    fun loadServicesMotorBike(idMoto: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val motoServices = fifeBaseRepository.getServiceMotorBike(number)
+            val services = fifeBaseRepository.loadServicesMotorBike(idMoto)
 
             withContext(Dispatchers.Main) {
-                motoService.postValue(motoServices)
+                motoServices.postValue(services)
             }
         }
     }

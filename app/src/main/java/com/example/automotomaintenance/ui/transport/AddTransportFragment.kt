@@ -1,4 +1,4 @@
-package com.example.automotomaintenance
+package com.example.automotomaintenance.ui.transport
 
 import android.animation.ValueAnimator
 import android.os.Bundle
@@ -6,19 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.automotomaintenance.R
 import com.example.automotomaintenance.databinding.FragmentAddVehicleBinding
-import com.example.automotomaintenance.repository.AuthRepository
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class AddVehiclesFragment : Fragment() {
+class AddTransportFragment : Fragment() {
 
-    @Inject
-    lateinit var authRepository: AuthRepository
     private lateinit var binding: FragmentAddVehicleBinding
+    private val viewModel: AddTransportViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,10 +30,14 @@ class AddVehiclesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.emailUser.text = authRepository.getUserEmail()
+        viewModel.getUserEmail()
+
+        viewModel.userEmail.observe(viewLifecycleOwner) { email ->
+            binding.emailUser.text = email
+        }
 
         binding.logout.setOnClickListener {
-            authRepository.logout()
+            viewModel.logout()
             route()
         }
 
@@ -59,7 +61,7 @@ class AddVehiclesFragment : Fragment() {
         }
     }
 
-    fun route() {
+    private fun route() {
         val navController = findNavController()
         navController.setGraph(R.navigation.main_nav_graph)
         navController.navigate(R.id.action_global_registerFragment)

@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.automotomaintenance.databinding.ItemVehicleBinding
-import com.example.automotomaintenance.model.Vehicle
+import com.example.automotomaintenance.model.TransportVehicle
 
 class CarAdapter(
-    private val onClick: (number: String) -> Unit
-) : ListAdapter<Vehicle, CarViewHolder>(CarDiffUtil()) {
+    private val onClick: (idCar: String) -> Unit
+) : ListAdapter<TransportVehicle, CarViewHolder>(CarDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
         return CarViewHolder(
@@ -18,14 +18,13 @@ class CarAdapter(
                 false
             )
         )
-
     }
 
     override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
-        getItem(position)?.let { vehicle ->
+        getItem(position)?.let { car ->
             holder.bind(getItem(position))
             holder.itemView.setOnClickListener {
-                onClick(vehicle.number)
+                onClick(car.id)
             }
         }
     }

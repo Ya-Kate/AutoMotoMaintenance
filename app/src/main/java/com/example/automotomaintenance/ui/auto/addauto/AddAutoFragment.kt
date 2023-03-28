@@ -17,11 +17,6 @@ class AddAutoFragment : Fragment() {
 
     private lateinit var binding: FragmentAddAutoBinding
     private val viewModel: AddAutoViewModel by viewModels()
-
-
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,7 +25,6 @@ class AddAutoFragment : Fragment() {
         binding = FragmentAddAutoBinding.inflate(inflater, container, false)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -44,10 +38,8 @@ class AddAutoFragment : Fragment() {
             val year = binding.year.editText?.text.toString()
             val volume = binding.volume.editText?.text.toString()
 
-            if(brand == "" || number == "" || year == "") {
-                val toast:Toast = Toast.makeText(requireContext(), "NOT BE EMPTY: BRAND, NUMBER, YEAR", Toast.LENGTH_LONG)
-                toast.setGravity(Gravity.CENTER, 0, 0)
-                toast.verticalMargin
+            if(brand.isBlank() || number.isBlank() || year.isBlank()) {
+                val toast:Toast = Toast.makeText(requireContext(), R.string.not_empty_add_transport, Toast.LENGTH_LONG)
                 toast.show()
             }
             else{
@@ -63,6 +55,5 @@ class AddAutoFragment : Fragment() {
         binding.back.setOnClickListener {
             findNavController().popBackStack()
         }
-
     }
 }

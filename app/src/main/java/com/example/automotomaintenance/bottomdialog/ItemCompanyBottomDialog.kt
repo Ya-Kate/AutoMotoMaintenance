@@ -6,12 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.automotomaintenance.databinding.DialogCompanyItemBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-class CompanyBottomDialog : BottomSheetDialogFragment() {
+@AndroidEntryPoint
+class ItemCompanyBottomDialog : BottomSheetDialogFragment() {
 
     private lateinit var binding: DialogCompanyItemBinding
-    var onDeleteCompany: (() -> Unit)? = null
-    var onEditCompany: (() -> Unit)? = null
+
+    var onDelete: (() -> Unit)? = null
+    var onEdit: (() -> Unit)? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,14 +29,13 @@ class CompanyBottomDialog : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.delete.setOnClickListener {
-            onDeleteCompany?.invoke()
+            onDelete?.invoke()
             dismiss()
         }
 
-
-        binding.edit.setOnClickListener{
-            onEditCompany?.invoke()
-            dismiss()
+        binding.edit.setOnClickListener {
+            onEdit?.invoke()
+//            dismiss()
         }
     }
 }

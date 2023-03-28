@@ -3,10 +3,15 @@ package com.example.automotomaintenance.ui.company.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import com.example.automotomaintenance.R
+import com.example.automotomaintenance.databinding.FragmentCompanyBinding
 import com.example.automotomaintenance.databinding.ItemCompanyBinding
 import com.example.automotomaintenance.model.Company
 
-class CompanyAdapter(private val onClick: (name: String) -> Unit) :
+class CompanyAdapter(
+    private val onClick: (String) -> Unit,
+    private val onPhoneClick: (String) -> Unit
+) :
     ListAdapter<Company, CompanyViewHolder>(CompanyDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CompanyViewHolder {
@@ -23,8 +28,9 @@ class CompanyAdapter(private val onClick: (name: String) -> Unit) :
         getItem(position)?.let { company ->
             holder.bind(getItem(position))
             holder.itemView.setOnClickListener {
-                onClick(company.name)
+                onClick(company.id)
             }
+            holder.setOnPhoneClick(onPhoneClick)
         }
     }
 }

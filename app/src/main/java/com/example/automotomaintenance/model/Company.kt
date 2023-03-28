@@ -21,6 +21,9 @@ data class Company(
     @ColumnInfo(name = "address")
     var address: String = "",
 
+    @ColumnInfo(name = "id")
+    var id: String = "",
+
     @PrimaryKey(autoGenerate = true)
     var idUser: String = ""
 

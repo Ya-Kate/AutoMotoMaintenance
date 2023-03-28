@@ -20,5 +20,4 @@ class AddAutoViewModel @Inject constructor(private val repository: FifeBaseRepos
             autoAdded?.invoke()
         }
     }
-
 }

@@ -39,11 +39,9 @@ class AddCompanyFragment : Fragment() {
             val person = binding.person.editText?.text.toString()
             val address = binding.address.editText?.text.toString()
 
-            if (name == "" || information == "" || phone == "") {
+            if (name.isBlank() || information.isBlank() || phone.isBlank()) {
                 val toast: Toast =
-                    Toast.makeText(requireContext(), "NOT BE EMPTY", Toast.LENGTH_LONG)
-                toast.setGravity(Gravity.CENTER, 0, 0)
-                toast.verticalMargin
+                    Toast.makeText(requireContext(), R.string.not_empty, Toast.LENGTH_LONG)
                 toast.show()
             } else {
                 viewModel.addCompany(name, information, phone, person, address)
@@ -54,7 +52,6 @@ class AddCompanyFragment : Fragment() {
                 binding.person.editText?.text = null
                 binding.address.editText?.text = null
             }
-
         }
 
         binding.back.setOnClickListener {

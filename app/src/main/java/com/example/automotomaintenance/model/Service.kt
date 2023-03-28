@@ -23,6 +23,9 @@ data class Service(
     @ColumnInfo(name = "cost")
     var cost: String = "",
 
+    @ColumnInfo(name = "id")
+    var idService: String = "",
+
     @PrimaryKey(autoGenerate = true)
     var idUser: String = ""
 )

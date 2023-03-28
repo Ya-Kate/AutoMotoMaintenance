@@ -7,7 +7,7 @@ import com.example.automotomaintenance.databinding.ItemServiceBinding
 import com.example.automotomaintenance.model.Service
 
 class ServiceCarAdapter(
-    private val onClick: (service: String) -> Unit
+    private val onClick: (idService: String) -> Unit
 ) : ListAdapter<Service, ServiceCarViewHolder>(ServiceDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ServiceCarViewHolder {
@@ -24,7 +24,7 @@ class ServiceCarAdapter(
         getItem(position)?.let { service ->
             holder.bind(getItem(position))
             holder.itemView.setOnClickListener {
-                onClick(service.service)
+                onClick(service.idService)
             }
         }
     }

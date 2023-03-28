@@ -6,7 +6,7 @@
     <string name="year">year</string>
     <string name="volume">volume</string>
     <string name="logout">logout</string>
-    <string name="add_vehicle">ADD vehicle</string>
+    <string name="add_vehicle">ADD Transport</string>
     <string name="add_company">ADD company</string>
     <string name="auto">Auto</string>
     <string name="moto">Moto</string>
@@ -19,8 +19,9 @@
     <string name="auto_amp_moto"><![CDATA[Auto & Moto]]></string>
     <string name="maintenance">Maintenance</string>
     <string name="list">list</string>
-    <string name="search">search</string>
     <string name="company">company</string>
+    <string name="search">search</string>
+    <string name="info">information</string>
     <string name="add_menu">add</string>
     <string name="add_car">add car</string>
     <string name="add_bike">add motorbike</string>
@@ -46,5 +47,14 @@
     <string name="delete_">delete?</string>
     <string name="no">no</string>
     <string name="yes">yes</string>
+    <string name="comma">%1$s ,</string>
+    <string name="cc">%1$s cc</string>
+    <string name="person">person</string>
+    <string name="not_empty">"NOT BE EMPTY"</string>
+    <string name="call_denied">"CALL DENIED"</string>
+    <string name="not_empty_add_transport">"CAN'T BE EMPTY: BRAND, NUMBER, YEAR"</string>
+    <string name="not_empty_service">"CAN'T BE EMPTY: KM, SERVICE"</string>
+    <string name="km_number">"'km' must be NUMBER"</string>
+    <string name="should_not_empty">"Shouldn't be empty"</string>
 
 </resources>

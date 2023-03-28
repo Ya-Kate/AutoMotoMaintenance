@@ -1,4 +1,4 @@
-package com.example.automotomaintenance
+package com.example.automotomaintenance.ui.start
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.automotomaintenance.R
 import com.example.automotomaintenance.databinding.FragmentStartProjectBinding
 import dagger.hilt.android.AndroidEntryPoint
 

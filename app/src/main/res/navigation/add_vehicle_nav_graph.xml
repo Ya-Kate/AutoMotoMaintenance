@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/AddVehiclesFragment"
-        android:name="com.example.automotomaintenance.AddVehiclesFragment"
+        android:name="com.example.automotomaintenance.ui.transport.AddTransportFragment"
         tools:layout="@layout/fragment_add_vehicle" >
         <action
             android:id="@+id/action_AddVehiclesFragment_to_addAutoFragment"

@@ -1,5 +1,6 @@
 package com.example.automotomaintenance.ui.company
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,22 +9,32 @@ import com.example.automotomaintenance.repository.FifeBaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class CompanyViewModel @Inject constructor(
-    private val fifeBaseRepository: FifeBaseRepository
-) : ViewModel() {
+class CompanyViewModel @Inject constructor() : ViewModel() {
 
-    val listCompany = MutableLiveData<ArrayList<Company>>()
+    @Inject
+    lateinit var fifeBaseRepository: FifeBaseRepository
+     val listCompanies = MutableLiveData<List<Company>>()
+     val isLoaderVisible = MutableLiveData<Boolean>()
 
-    fun getListCompany() {
+    fun loadListCompanies() {
+        isLoaderVisible.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
-            fifeBaseRepository.getCompany {
-                if (it.isNotEmpty()) {
-                    listCompany.postValue(it)
-                }
+            val companies = fifeBaseRepository.loadCompanies()
+            withContext(Dispatchers.Main) {
+                listCompanies.postValue(companies)
+                isLoaderVisible.value = false
             }
+        }
+    }
+
+    fun deleteCompany(nameCompany: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            fifeBaseRepository.deleteCompany(nameCompany)
+            loadListCompanies()
         }
     }
 }

@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Vehicle(
+data class TransportVehicle(
     @ColumnInfo(name = "brand")
     var brand: String = "",
 
@@ -17,6 +17,9 @@ data class Vehicle(
 
     @ColumnInfo(name = "volume")
     var volume: String = "",
+
+    @ColumnInfo(name = "volume")
+    var id: String = "",
 
     @PrimaryKey(autoGenerate = true)
     var idUser: String = ""

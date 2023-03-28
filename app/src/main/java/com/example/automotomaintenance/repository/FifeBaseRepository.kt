@@ -1,331 +1,459 @@
 package com.example.automotomaintenance.repository
 
+import android.content.ContentValues.TAG
+import android.util.Log
+import com.example.automotomaintenance.constans.DbConstants
 import com.example.automotomaintenance.model.Company
 import com.example.automotomaintenance.model.Service
-import com.example.automotomaintenance.model.Vehicle
+import com.example.automotomaintenance.model.TransportVehicle
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import wu.seal.jsontokotlin.feedback.configLogUrl
+import kotlinx.coroutines.tasks.await
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
+
 
 class FifeBaseRepository @Inject constructor(
 ) {
+    interface Listener {
+        fun onCompanyUpdated(updateCompany: Company)
+    }
 
+    interface ListenerServiceCar {
+        fun onServiceCarUpdated(updateServiceCar: Service)
+    }
+
+    interface ListenerServiceMotorBike {
+        fun onServiceMotorBikeUpdate(updateServiceMotorBike: Service)
+    }
+
+    private val companyUpdatedListeners: MutableList<Listener> = mutableListOf()
+    private val serviceCarUpdateListeners: MutableList<ListenerServiceCar> = mutableListOf()
+    private val serviceMotorBikeUpdateListeners: MutableList<ListenerServiceMotorBike> =
+        mutableListOf()
     private val db: DatabaseReference = Firebase.database.reference
 
+    fun addCompanyListener(listener: Listener) {
+        companyUpdatedListeners.add(listener)
+    }
+
+    fun removeCompanyListener(listener: Listener) {
+        companyUpdatedListeners.remove(listener)
+    }
+
+    fun addServiceCarListener(listener: ListenerServiceCar) {
+        serviceCarUpdateListeners.add(listener)
+    }
+
+    fun removeServiceCarListener(listener: ListenerServiceCar) {
+        serviceCarUpdateListeners.remove(listener)
+    }
+
+    fun addServiceMotorBikeListener(listener: ListenerServiceMotorBike) {
+        serviceMotorBikeUpdateListeners.add(listener)
+    }
+
+    fun removeServiceMotorBikeListener(listener: ListenerServiceMotorBike) {
+        serviceMotorBikeUpdateListeners.remove(listener)
+    }
+
     fun addCar(brand: String, number: String, year: String, volume: String) {
-        db.child("vehicle")
-            .child(Firebase.auth.currentUser?.uid ?: "")
-            .child("car")
-            .child(number)
+        val idCar = UUID.randomUUID().toString()
+        db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.TRANSPORT_VEHICLE)
+            .child(DbConstants.CAR)
+            .child(idCar)
             .setValue(
-                Vehicle(
-                    brand, number, year, volume, Firebase.auth.currentUser?.uid ?: ""
+                TransportVehicle(
+                    brand, number, year, volume, idCar, Firebase.auth.currentUser?.uid ?: ""
                 )
-            ).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    //
-                } else {
-                    it.exception.let {
-                        //
-                    }
+            ).addOnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w(TAG, "Exception add car", task.exception)
                 }
             }
     }
 
     fun addMotorBike(brand: String, number: String, year: String, volume: String) {
-        db.child("vehicle")
-            .child(Firebase.auth.currentUser?.uid ?: "")
-            .child("motorbike")
-            .child(number)
+        val idMotorBike = UUID.randomUUID().toString()
+        db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.TRANSPORT_VEHICLE)
+            .child(DbConstants.MOTOR_BIKE)
+            .child(idMotorBike)
             .setValue(
-                Vehicle(
-                    brand, number, year, volume, Firebase.auth.currentUser?.uid ?: ""
+                TransportVehicle(
+                    brand, number, year, volume, idMotorBike, Firebase.auth.currentUser?.uid ?: ""
                 )
-            ).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    //
-                } else {
-                    it.exception.let {
-                        //
-                    }
+            ).addOnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w(TAG, "Exception add motorbike", task.exception)
                 }
             }
     }
 
-    fun getCars(onChange: (list: ArrayList<Vehicle>) -> Unit) {
-        db.child("vehicle")
-            .child(Firebase.auth.currentUser?.uid ?: "")
-            .child("car")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val list = arrayListOf<Vehicle>()
-                    snapshot.children.forEach {
-                        (it.getValue(Vehicle::class.java))?.let { vehicle ->
-                            list.add(vehicle)
-                        }
-                    }
-                    onChange(list)
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    //
-                }
-            })
+    suspend fun loadCars(): List<TransportVehicle> {
+        val snapshot =
+            db.child(Firebase.auth.currentUser?.uid ?: "")
+                .child(DbConstants.TRANSPORT_VEHICLE)
+                .child(DbConstants.CAR)
+                .get()
+                .await()
+        val cars: List<TransportVehicle> = snapshot.children.map {
+            it.getValue(TransportVehicle::class.java)!!
+        }
+        return cars
     }
 
-    fun getOneCar(numberAuto: String): List<Vehicle> {
-        val autoInfo = arrayListOf<Vehicle>()
-        db.child("vehicle")
-            .child(Firebase.auth.currentUser?.uid ?: "")
-            .child("car")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    snapshot.children.forEach {
-                        (it.getValue(Vehicle::class.java))?.let { vehicle ->
-                            if (vehicle.number == numberAuto) {
-                                autoInfo.add(vehicle)
-                            }
-                        }
-                    }
-                }
+    suspend fun loadOneCar(idCar: String): ArrayList<TransportVehicle> {
+        val snapshot =
+            db.child(Firebase.auth.currentUser?.uid ?: "")
+                .child(DbConstants.TRANSPORT_VEHICLE)
+                .child(DbConstants.CAR)
+                .get()
+                .await()
 
-                override fun onCancelled(error: DatabaseError) {
-                    //
+        val autoInfo = arrayListOf<TransportVehicle>()
+        snapshot.children.forEach {
+            (it.getValue(TransportVehicle::class.java))?.let { car ->
+                if (car.id == idCar) {
+                    autoInfo.add(car)
                 }
-            })
+            }
+        }
         return autoInfo
     }
 
-    fun getMotorBike(onChange: (list: ArrayList<Vehicle>) -> Unit) {
-        db.child("vehicle")
-            .child(Firebase.auth.currentUser?.uid ?: "")
-            .child("motorbike")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val list = arrayListOf<Vehicle>()
-                    snapshot.children.forEach {
-                        (it.getValue(Vehicle::class.java))?.let { vehicle ->
-                            list.add(vehicle)
-                        }
-                    }
-                    onChange(list)
-                }
+    suspend fun loadMotorBikes(): List<TransportVehicle> {
+        val snapshot =
+            db.child(Firebase.auth.currentUser?.uid ?: "")
+                .child(DbConstants.TRANSPORT_VEHICLE)
+                .child(DbConstants.MOTOR_BIKE)
+                .get()
+                .await()
 
-                override fun onCancelled(error: DatabaseError) {
-                    //
-                }
-            })
+        val motorBikes: List<TransportVehicle> = snapshot.children.map {
+            it.getValue(TransportVehicle::class.java)!!
+        }
+        return motorBikes
     }
 
-    fun getOneMotorbike(numberMoto: String): List<Vehicle> {
-        val motoInfo = arrayListOf<Vehicle>()
-        db.child("vehicle")
-            .child(Firebase.auth.currentUser?.uid ?: "")
-            .child("motorbike")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    snapshot.children.forEach {
-                        (it.getValue(Vehicle::class.java))?.let { vehicle ->
-                            if (vehicle.number == numberMoto) {
-                                motoInfo.add(vehicle)
-                            }
-                        }
-                    }
-                }
+    suspend fun loadOneMotorbike(idMoto: String): List<TransportVehicle> {
+        val snapshot =
+            db.child(Firebase.auth.currentUser?.uid ?: "")
+                .child(DbConstants.TRANSPORT_VEHICLE)
+                .child(DbConstants.MOTOR_BIKE)
+                .get()
+                .await()
 
-                override fun onCancelled(error: DatabaseError) {
-                    //
+        val motorBikeInfo = arrayListOf<TransportVehicle>()
+        snapshot.children.forEach {
+            (it.getValue(TransportVehicle::class.java))?.let { motorBike ->
+                if (motorBike.id == idMoto) {
+                    motorBikeInfo.add(motorBike)
                 }
-            })
-        return motoInfo
+            }
+        }
+        return motorBikeInfo
     }
 
-    fun addServiceCar(km: Int, data: Date, service: String, cost: String, number: String) {
-
-        db.child("vehicle")
-            .child(Firebase.auth.currentUser?.uid ?: "")
-            .child("car")
-            .child(number)
-            .child("service")
-            .child(UUID.randomUUID().toString())
+    fun addServiceCar(km: Int, data: Date, service: String, cost: String, idCar: String) {
+        val kay = db.push()
+        val kayNew = kay.key.toString()
+        db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.TRANSPORT_VEHICLE)
+            .child(DbConstants.CAR)
+            .child(idCar)
+            .child(DbConstants.SERVICE)
+            .child(kayNew)
             .setValue(
                 Service(
-                    km, data, service, cost, Firebase.auth.currentUser?.uid ?: "",
+                    km, data, service, cost, kayNew, Firebase.auth.currentUser?.uid ?: "",
                 )
             ).addOnCompleteListener {
                 if (it.isSuccessful) {
-                    //
+                    Log.i(TAG, "Successful add car service.")
                 } else {
-                    it.exception.let {
-                        //
+                    it.exception.let { exception ->
+                        Log.e(TAG, "Failed to add value car service.", exception)
                     }
                 }
             }
     }
 
-    fun addServiceMotorBike(km: Int, data: Date, service: String, cost: String, number: String) {
-
-        db.child("vehicle")
-            .child(Firebase.auth.currentUser?.uid ?: "")
-            .child("motorbike")
-            .child(number)
-            .child("service")
-            .child(UUID.randomUUID().toString())
+    fun addServiceMotorBike(km: Int, data: Date, service: String, cost: String, idMoto: String) {
+        val kay = db.push()
+        val kayNew = kay.key.toString()
+        db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.TRANSPORT_VEHICLE)
+            .child(DbConstants.MOTOR_BIKE)
+            .child(idMoto)
+            .child(DbConstants.SERVICE)
+            .child(kayNew)
             .setValue(
                 Service(
-                    km, data, service, cost, Firebase.auth.currentUser?.uid ?: "",
+                    km, data, service, cost, kayNew, Firebase.auth.currentUser?.uid ?: "",
                 )
             ).addOnCompleteListener {
                 if (it.isSuccessful) {
-                    //
+                    Log.i(TAG, "Successful add motorbike service.")
                 } else {
-                    it.exception.let {
-                        //
+                    it.exception.let { exception ->
+                        Log.e(TAG, "Failed to add value motorbike service.", exception)
                     }
                 }
             }
     }
 
-    fun getServiceCar(number: String): ArrayList<Service> {
-        val list = arrayListOf<Service>()
-        db.child("vehicle")
-            .child(Firebase.auth.currentUser?.uid ?: "")
-            .child("car")
-            .child(number)
-            .child("service")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    snapshot.children.forEach {
-                        (it.getValue(Service::class.java))?.let { service ->
-                            list.add(service)
-                        }
-                    }
-                }
-                override fun onCancelled(error: DatabaseError) {
-                    //
-                }
-            })
-        return list
+    suspend fun loadServicesCar(idCar: String): List<Service> {
+
+        val snapshot =
+            db.child(Firebase.auth.currentUser?.uid ?: "")
+                .child(DbConstants.TRANSPORT_VEHICLE)
+                .child(DbConstants.CAR)
+                .child(idCar)
+                .child(DbConstants.SERVICE)
+                .get()
+                .await()
+
+        val services: List<Service> = snapshot.children.map {
+            it.getValue(Service::class.java)!!
+        }
+        return services
     }
 
-    fun getServiceMotorBike(number: String): ArrayList<Service> {
-        val list = arrayListOf<Service>()
-        db.child("vehicle")
-            .child(Firebase.auth.currentUser?.uid ?: "")
-            .child("motorbike")
-            .child(number)
-            .child("service")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    snapshot.children.forEach {
-                        (it.getValue(Service::class.java))?.let { service ->
-                            list.add(service)
-                        }
-                    }
+    suspend fun loadOneServiceCar(idCar: String, idService: String): ArrayList<Service> {
+
+        val snapshot =
+            db.child(Firebase.auth.currentUser?.uid ?: "")
+                .child(DbConstants.TRANSPORT_VEHICLE)
+                .child(DbConstants.CAR)
+                .child(idCar)
+                .child(DbConstants.SERVICE)
+                .get()
+                .await()
+
+        val serviceInfo = arrayListOf<Service>()
+        snapshot.children.forEach {
+            (it.getValue(Service::class.java))?.let { service ->
+                if (service.idService == idService) {
+                    serviceInfo.add(service)
                 }
-                override fun onCancelled(error: DatabaseError) {
-                    //
+            }
+        }
+        return serviceInfo
+    }
+
+    fun updateServiceCar(
+        km: Int,
+        data: Date,
+        service: String,
+        cost: String,
+        idCar: String,
+        idServiceCar: String
+    ) {
+        val serviceCar = Service(
+            km, data, service, cost, idServiceCar, Firebase.auth.currentUser?.uid ?: ""
+        )
+        db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.TRANSPORT_VEHICLE)
+            .child(DbConstants.CAR)
+            .child(idCar)
+            .child(DbConstants.SERVICE)
+            .child(idServiceCar)
+            .setValue(serviceCar)
+
+        serviceCarUpdateListeners.forEach { listenerService ->
+            listenerService.onServiceCarUpdated(serviceCar)
+        }
+    }
+
+
+    suspend fun loadServicesMotorBike(idMoto: String): List<Service> {
+
+        val snapshot =
+            db.child(Firebase.auth.currentUser?.uid ?: "")
+                .child(DbConstants.TRANSPORT_VEHICLE)
+                .child(DbConstants.MOTOR_BIKE)
+                .child(idMoto)
+                .child(DbConstants.SERVICE)
+                .orderByKey()
+                .get()
+                .await()
+
+        val services: List<Service> = snapshot.children.map {
+            it.getValue(Service::class.java)!!
+        }
+        return services
+    }
+
+    suspend fun loadOneServiceMotorBike(idMoto: String, idService: String): ArrayList<Service> {
+
+        val snapshot =
+            db.child(Firebase.auth.currentUser?.uid ?: "")
+                .child(DbConstants.TRANSPORT_VEHICLE)
+                .child(DbConstants.MOTOR_BIKE)
+                .child(idMoto)
+                .child(DbConstants.SERVICE)
+                .get()
+                .await()
+
+        val serviceInfo = arrayListOf<Service>()
+        snapshot.children.forEach {
+            (it.getValue(Service::class.java))?.let { service ->
+                if (service.idService == idService) {
+                    serviceInfo.add(service)
                 }
-            })
-        return list
+            }
+        }
+        return serviceInfo
+    }
+
+    fun updateServiceMotorBike(
+        km: Int,
+        data: Date,
+        service: String,
+        cost: String,
+        idMoto: String,
+        idService: String
+    ) {
+        val serviceMoto = Service(
+            km, data, service, cost, idService, Firebase.auth.currentUser?.uid ?: ""
+        )
+        db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.TRANSPORT_VEHICLE)
+            .child(DbConstants.MOTOR_BIKE)
+            .child(idMoto)
+            .child(DbConstants.SERVICE)
+            .child(idService)
+            .setValue(serviceMoto)
+
+        serviceMotorBikeUpdateListeners.forEach { listenerService ->
+            listenerService.onServiceMotorBikeUpdate(serviceMoto)
+        }
     }
 
     fun addCompany(
         name: String, information: String, phone: String, person: String, address: String
     ) {
-        db.child("company")
-            .child(Firebase.auth.currentUser?.uid ?: "")
-            .child(name)
+        val idCompany = UUID.randomUUID().toString()
+        db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.COMPANY)
+            .child(idCompany)
             .setValue(
                 Company(
-                    name, information, phone, person, address, Firebase.auth.currentUser?.uid ?: "",
+                    name, information, phone, person, address, idCompany,
+                    Firebase.auth.currentUser?.uid ?: "",
                 )
-            ).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    //
-                } else {
-                    it.exception.let {
-                        //
-                    }
+            ).addOnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w(TAG, "Exception aad company.", task.exception)
                 }
             }
     }
 
-    fun getCompany(onChange: (list: ArrayList<Company>) -> Unit) {
-        db.child("company")
-            .child(Firebase.auth.currentUser?.uid ?: "")
+    suspend fun loadCompanies(): List<Company> {
+        val snapshot = db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.COMPANY)
+            .get()
+            .await()
+
+        val companies: List<Company> = snapshot.children.map {
+            it.getValue(Company::class.java)!!
+        }
+        return companies
+    }
+
+    fun loadOneCompany(idCompany: String): List<Company> {
+        val companyInfo = arrayListOf<Company>()
+        db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.COMPANY)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val list = arrayListOf<Company>()
                     snapshot.children.forEach {
                         (it.getValue(Company::class.java))?.let { company ->
-                            list.add(company)
-                        }
-                    }
-                    onChange(list)
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    //
-                }
-            })
-    }
-
-    fun deleteOneCar(numberAuto: String) {
-        db.child("vehicle")
-            .child(Firebase.auth.currentUser?.uid ?: "")
-            .child("car")
-            .child(numberAuto)
-            .removeValue()
-    }
-
-    fun deleteOneMotorbike(numberMoto: String) {
-        db.child("vehicle")
-            .child(Firebase.auth.currentUser?.uid ?: "")
-            .child("motorbike")
-            .child(numberMoto)
-            .removeValue()
-    }
-
-    fun deleteCompany(nameCompany: String) {
-        db.child("company")
-            .child(Firebase.auth.currentUser?.uid ?: "")
-            .child(nameCompany)
-            .removeValue()
-    }
-
-    fun deleteServiceCar(nameService: String, number:String) {
-        db.child("vehicle")
-            .child(Firebase.auth.currentUser?.uid ?: "")
-            .child("car")
-            .child(number)
-            .child("service")
-        (object : ValueEventListener, DatabaseReference.CompletionListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    snapshot.children.forEach {
-                        (it.getValue(Service::class.java))?.let { service ->
-                            if(service.service == nameService) {
-//                                как правильно удалить одну заметку из fireBase
-
+                            if (company.id == idCompany) {
+                                companyInfo.add(company)
                             }
                         }
                     }
                 }
-                override fun onCancelled(error: DatabaseError) {
-                    //
-                }
 
-                override fun onComplete(error: DatabaseError?, ref: DatabaseReference) {
-                    //
+                override fun onCancelled(error: DatabaseError) {
+                    Log.w(TAG, "Failed to read value one company.", error.toException())
                 }
             })
+        return companyInfo
+    }
 
+    fun updateCompany(
+        idCompany: String,
+        nameCompany: String?,
+        information: String?,
+        phone: String?,
+        person: String?,
+        address: String?
+    ) {
+        val company = Company(
+            nameCompany.toString(),
+            information.toString(),
+            phone.toString(),
+            person.orEmpty(),
+            address.orEmpty(),
+            idCompany,
+            Firebase.auth.currentUser?.uid ?: ""
+        )
+        db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.COMPANY)
+            .child(idCompany)
+            .setValue(company)
+        companyUpdatedListeners.forEach { listener ->
+            listener.onCompanyUpdated(company)
+        }
+    }
+
+    fun deleteCompany(nameCompany: String) {
+        db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.COMPANY)
+            .child(nameCompany)
+            .removeValue()
+    }
+
+    fun deleteOneCar(idCar: String) {
+        db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.TRANSPORT_VEHICLE)
+            .child(DbConstants.CAR)
+            .child(idCar)
+            .removeValue()
+    }
+
+    fun deleteOneMotorbike(idMoto: String) {
+        db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.TRANSPORT_VEHICLE)
+            .child(DbConstants.MOTOR_BIKE)
+            .child(idMoto)
+            .removeValue()
+    }
+
+    fun deleteServiceCar(idService: String, idCar: String) {
+        db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.TRANSPORT_VEHICLE)
+            .child(DbConstants.CAR)
+            .child(idCar)
+            .child(DbConstants.SERVICE)
+            .child(idService)
+            .removeValue()
+    }
+
+    fun deleteServiceMotorBike(idService: String, idMoto: String) {
+        db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.TRANSPORT_VEHICLE)
+            .child(DbConstants.MOTOR_BIKE)
+            .child(idMoto)
+            .child(DbConstants.SERVICE)
+            .child(idService)
+            .removeValue()
     }
 }

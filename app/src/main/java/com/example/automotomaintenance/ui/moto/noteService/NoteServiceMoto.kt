@@ -1,4 +1,4 @@
-package com.example.automotomaintenance.ui.service
+package com.example.automotomaintenance.ui.moto.noteService
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -12,35 +12,32 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.automotomaintenance.R
-import com.example.automotomaintenance.databinding.FragmentAddMotoServiceBinding
+import com.example.automotomaintenance.databinding.FragmentNoteServiceMotoBinding
+import com.example.automotomaintenance.model.Service
 import com.example.automotomaintenance.util.getData
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class AddMotoServiceFragment : Fragment() {
-
-    lateinit var binding: FragmentAddMotoServiceBinding
-    private val viewModel: AddMotoServiceViewModel by viewModels()
+class NoteServiceMoto : Fragment() {
+    private lateinit var binding: FragmentNoteServiceMotoBinding
+    private val viewModel: NoteServiceMotoViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentAddMotoServiceBinding.inflate(inflater, container, false)
+        binding = FragmentNoteServiceMotoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val args: AddMotoServiceFragmentArgs by navArgs()
-        val id: String = args.numberArg
-
-        binding.back.setOnClickListener {
-            findNavController().popBackStack()
-        }
+        val args: NoteServiceMotoArgs by navArgs()
+        val idMoto = args.idMotoArg
+        val idService = args.idServiceArg
 
         val cal = Calendar.getInstance()
         var dataService = cal.time
@@ -56,6 +53,25 @@ class AddMotoServiceFragment : Fragment() {
             }
         }
 
+        viewModel.addServiceMotorBikeListener()
+
+        viewModel.loadNoteService(idMoto, idService)
+
+        viewModel.noteServiceMotorBike.observe(viewLifecycleOwner) {
+            val infoService: List<Service> = it
+            binding.km.editText?.setText(infoService[0].km.toString())
+            binding.data.text = getData(infoService[0].data)
+            binding.service.editText?.setText(infoService[0].service)
+            binding.cost.editText?.setText(infoService[0].cost)
+        }
+
+        viewModel.updateServiceSuccess.observe(viewLifecycleOwner) {
+            val updateServiceMotorBike = it
+            if (updateServiceMotorBike) {
+                findNavController().popBackStack()
+            }
+        }
+
         binding.chooseDate.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 DatePickerDialog(
@@ -67,29 +83,32 @@ class AddMotoServiceFragment : Fragment() {
             }
         })
 
-        binding.addInfo.setOnClickListener {
+        binding.no.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        binding.yes.setOnClickListener {
 
             val km: Int = binding.km.editText?.text.toString().toInt()
             val date: Date = dataService
             val service: String = binding.service.editText?.text.toString()
             val cost: String = binding.cost.editText?.text.toString()
 
-            if (service.isBlank() || cost.isBlank()) {
-                val toast: Toast = Toast.makeText(
-                    requireContext(),
-                    R.string.not_empty_service,
-                    Toast.LENGTH_LONG
-                )
-                toast.show()
-            } else {
-                viewModel.addMotoService(km, date, service, cost, id)
-
-                binding.km.editText?.text = null
-                binding.data.text = null
-                binding.service.editText?.text = null
-                binding.cost.editText?.text = null
+            viewModel.validUpdateService(km, date, service, cost, idMoto, idService)
+            viewModel.validFail.observe(viewLifecycleOwner) {
+                val valid = it
+                if (!valid) {
+                    val toast: Toast =
+                        Toast.makeText(this.requireContext(), R.string.not_empty, Toast.LENGTH_LONG)
+                    toast.show()
+                }
             }
         }
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.removeServiceMotorBikeListener()
     }
 }
-

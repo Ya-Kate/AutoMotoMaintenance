@@ -13,22 +13,17 @@ import com.example.automotomaintenance.bottomdialog.ItemDeleteDialog
 import com.example.automotomaintenance.ui.auto.adapter.CarAdapter
 import com.example.automotomaintenance.ui.moto.adapter.MotorBikeAdapter
 import com.example.automotomaintenance.databinding.FragmentListVehicalBinding
-import com.example.automotomaintenance.repository.FifeBaseRepository
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class ListVehicleFragment @Inject constructor() :
+class ListTransportFragment :
     Fragment() {
 
     private lateinit var binding: FragmentListVehicalBinding
     private lateinit var adapterAuto: CarAdapter
     private lateinit var adapterMoto: MotorBikeAdapter
-    private val viewModel: ListVehicleViewModel by viewModels()
+    private val viewModel: ListTransportViewModel by viewModels()
     private var deleteDialog: ItemDeleteDialog? = null
-
-    @Inject
-    lateinit var fifeBaseRepository: FifeBaseRepository
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,31 +37,34 @@ class ListVehicleFragment @Inject constructor() :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.loadListCars()
+        viewModel.loadListMotorBikes()
+
         adapterAuto = CarAdapter {
-            val numberAuto = it
+            val idCar = it
             ItemBottomDialog().apply {
                 onAddService = {
                     val action =
-                        ListVehicleFragmentDirections.actionListVehicleFragmentToAddServiceFragment(
-                            numberAuto
+                        ListTransportFragmentDirections.actionListVehicleFragmentToAddServiceFragment(
+                            idCar
                         )
                     findNavController().navigate(action)
                 }
 
                 onShowClicked = {
                     val action =
-                        ListVehicleFragmentDirections.actionListVehicleFragmentToAutoFragment(
-                            numberAuto
+                        ListTransportFragmentDirections.actionListVehicleFragmentToAutoFragment(
+                            idCar
                         )
                     findNavController().navigate(action)
                 }
-
 
                 onDelete = {
                     deleteDialog = ItemDeleteDialog()
                     deleteDialog?.let { dialog ->
                         dialog.onSuccess = {
-                            fifeBaseRepository.deleteOneCar(numberAuto)
+                            viewModel.deleteCar(idCar)
+                            viewModel.loadListCars()
                             this.dismiss()
                         }
                         dialog.show(childFragmentManager, "..")
@@ -77,25 +75,25 @@ class ListVehicleFragment @Inject constructor() :
         }
         binding.listAuto.adapter = adapterAuto
         binding.listAuto.layoutManager = LinearLayoutManager(requireContext())
-        fifeBaseRepository.getCars {
+        viewModel.listCars.observe(viewLifecycleOwner) {
             adapterAuto.submitList(it)
         }
 
         adapterMoto = MotorBikeAdapter {
-            val numberMoto = it
+            val idMotorBike = it
             ItemBottomDialog().apply {
                 onAddService = {
                     val action =
-                        ListVehicleFragmentDirections.actionListVehicleFragmentToAddMotoServiceFragment(
-                            numberMoto
+                        ListTransportFragmentDirections.actionListVehicleFragmentToAddMotoServiceFragment(
+                            idMotorBike
                         )
                     findNavController().navigate(action)
                 }
 
                 onShowClicked = {
                     val action =
-                        ListVehicleFragmentDirections.actionListVehicleFragmentToMotoFragment(
-                            numberMoto
+                        ListTransportFragmentDirections.actionListVehicleFragmentToMotoFragment(
+                            idMotorBike
                         )
                     findNavController().navigate(action)
                 }
@@ -104,19 +102,18 @@ class ListVehicleFragment @Inject constructor() :
                     deleteDialog = ItemDeleteDialog()
                     deleteDialog?.let { dialog ->
                         dialog.onSuccess = {
-                            fifeBaseRepository.deleteOneMotorbike(numberMoto)
+                            viewModel.deleteMotorBike(idMotorBike)
+                            viewModel.loadListMotorBikes()
                             this.dismiss()
                         }
                         dialog.show(childFragmentManager, "..")
                     }
-
                 }
-
             }.show(childFragmentManager, "..")
         }
         binding.listMoto.adapter = adapterMoto
         binding.listMoto.layoutManager = LinearLayoutManager(requireContext())
-        fifeBaseRepository.getMotorBike {
+        viewModel.listMotorBikes.observe(viewLifecycleOwner) {
             adapterMoto.submitList(it)
         }
     }

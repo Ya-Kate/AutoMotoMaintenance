@@ -15,9 +15,9 @@ class AddAutoServiceViewModel @Inject constructor(private val repository: FifeBa
 
     private var autoServiceAdded: (() -> Unit)? = null
 
-    fun addAutoService(km: Int, data: Date, service: String, cost: String, number: String) {
+    fun addAutoService(km: Int, data: Date, service: String, cost: String, idCar: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addServiceCar(km, data, service, cost, number)
+            repository.addServiceCar(km, data, service, cost, idCar)
             autoServiceAdded?.invoke()
         }
     }
