@@ -1,6 +1,5 @@
 package com.example.automotomaintenance.ui.company
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,8 +16,9 @@ class CompanyViewModel @Inject constructor() : ViewModel() {
 
     @Inject
     lateinit var fifeBaseRepository: FifeBaseRepository
-     val listCompanies = MutableLiveData<List<Company>>()
-     val isLoaderVisible = MutableLiveData<Boolean>()
+    val listCompanies = MutableLiveData<List<Company>>()
+    val isLoaderVisible = MutableLiveData<Boolean>()
+    val company = MutableLiveData<List<Company>>()
 
     fun loadListCompanies() {
         isLoaderVisible.postValue(true)
@@ -30,6 +30,16 @@ class CompanyViewModel @Inject constructor() : ViewModel() {
             }
         }
     }
+
+//    suspend fun loadOneCompany(idCompany: String) {
+//
+//        viewModelScope.launch(Dispatchers.IO) {
+//            val loadCompany = fifeBaseRepository.loadOneCompany(idCompany)
+//            withContext(Dispatchers.Main) {
+//                company.postValue(loadCompany)
+//            }
+//        }
+//    }
 
     fun deleteCompany(nameCompany: String) {
         viewModelScope.launch(Dispatchers.IO) {

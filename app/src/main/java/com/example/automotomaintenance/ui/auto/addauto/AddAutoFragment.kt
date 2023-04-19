@@ -6,7 +6,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.automotomaintenance.NavigationMainFragment
 import com.example.automotomaintenance.R
 import com.example.automotomaintenance.databinding.FragmentAddAutoBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView

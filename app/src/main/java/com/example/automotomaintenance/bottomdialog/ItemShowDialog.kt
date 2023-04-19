@@ -22,7 +22,7 @@ class ItemShowDialog : DialogFragment() {
     private val viewModel: ItemShowViewModel by viewModels()
 
     companion object {
-        val TAG = ItemShowDialog::class.java.name
+        val TAG:String = ItemShowDialog::class.java.name
         fun getInstance(fragmentManager: FragmentManager, idCompany: String): ItemShowDialog {
             val fragment: ItemShowDialog =
                 (fragmentManager.findFragmentByTag(TAG) as? ItemShowDialog) ?: ItemShowDialog()
@@ -39,7 +39,6 @@ class ItemShowDialog : DialogFragment() {
 
     var onSuccess: (() -> Unit)? = null
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -55,6 +54,7 @@ class ItemShowDialog : DialogFragment() {
         viewModel.addCompanyListener()
 
         viewModel.getItemCompany(idCompany)
+
         viewModel.infoCompany.observe(viewLifecycleOwner) {
             val infoCompany: List<Company> = it
 

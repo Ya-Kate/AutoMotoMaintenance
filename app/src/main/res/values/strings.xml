@@ -21,13 +21,14 @@
     <string name="list">list</string>
     <string name="company">company</string>
     <string name="search">search</string>
-    <string name="info">information</string>
+    <string name="info">info</string>
     <string name="add_menu">add</string>
     <string name="add_car">add car</string>
     <string name="add_bike">add motorbike</string>
     <string name="password">password</string>
     <string name="back">back</string>
     <string name="km">km</string>
+    <string name="km_km">%1$s km</string>
     <string name="choose_date">choose date</string>
     <string name="type_of_services">type of services</string>
     <string name="cost">cost</string>
@@ -40,7 +41,8 @@
     <string name="show">SHOW</string>
     <string name="edit">edit</string>
     <string name="name_company">name company</string>
-    <string name="information">information</string>
+    <string name="name_services">name services</string>
+    <string name="information">Information:</string>
     <string name="phone">phone</string>
     <string name="contact">contact</string>
     <string name="address">address</string>

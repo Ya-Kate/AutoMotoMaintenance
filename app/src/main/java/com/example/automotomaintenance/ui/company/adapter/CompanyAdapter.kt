@@ -3,8 +3,6 @@ package com.example.automotomaintenance.ui.company.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import com.example.automotomaintenance.R
-import com.example.automotomaintenance.databinding.FragmentCompanyBinding
 import com.example.automotomaintenance.databinding.ItemCompanyBinding
 import com.example.automotomaintenance.model.Company
 

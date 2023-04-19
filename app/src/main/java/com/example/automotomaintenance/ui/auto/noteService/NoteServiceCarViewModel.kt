@@ -35,8 +35,7 @@ class NoteServiceCarViewModel @Inject constructor() : ViewModel(),
     fun loadNoteService(idCar: String, idCompany: String) {
 
         viewModelScope.launch(Dispatchers.IO) {
-            val serviceInfo = fifeBaseRepository.
-            loadOneServiceCar(idCar, idCompany)
+            val serviceInfo = fifeBaseRepository.loadOneServiceCar(idCar, idCompany)
 
             withContext(Dispatchers.Main) {
                 noteServiceCar.postValue(serviceInfo)

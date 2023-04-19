@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
     id 'dagger.hilt.android.plugin'
 
     //    Firebase
@@ -59,6 +60,7 @@ dependencies {
     //    для Hilt
     implementation "com.google.dagger:hilt-android:2.44"
     implementation 'com.google.firebase:protolite-well-known-types:18.0.0'
+    implementation 'com.google.firebase:firebase-crashlytics-buildtools:2.9.4'
     kapt "com.google.dagger:hilt-compiler:2.44"
 
     //    scoupe, retrofit
@@ -73,8 +75,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
 
     //    Glide
-    implementation 'com.github.bumptech.glide:glide:4.14.2'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 
     implementation 'com.airbnb.android:lottie:5.2.0'
 
@@ -95,9 +97,11 @@ dependencies {
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
 
     //    Room
-    implementation "androidx.room:room-runtime:2.5.0"
-    implementation "androidx.room:room-ktx:2.5.0"
-    kapt "androidx.room:room-compiler:2.5.0"
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    androidTestImplementation "androidx.room:room-testing:$room_version"
 
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:31.1.1')

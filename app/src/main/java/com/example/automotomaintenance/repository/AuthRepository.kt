@@ -29,6 +29,7 @@ class AuthRepository @Inject constructor() {
         ).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 onSuccess()
+
             } else {
                 task.exception?.let { onError(it) }
             }
@@ -49,3 +50,6 @@ class AuthRepository @Inject constructor() {
         }
     }
 }
+
+
+

@@ -8,13 +8,18 @@
         android:id="@+id/list"
         android:icon="@drawable/ic_note"
         android:title="@string/list" />
-<!--    <item-->
-<!--        android:id="@+id/search"-->
-<!--        android:icon="@drawable/ic_search"-->
-<!--        android:title="@string/search" />-->
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search" />
     <item
         android:id="@+id/company"
-        android:icon="@drawable/ic_information"
+        android:icon="@drawable/ic_companies"
         android:title="@string/company" />
+
+    <item
+        android:id="@+id/information"
+        android:icon="@drawable/ic_information"
+        android:title="@string/info" />
 
 </menu>

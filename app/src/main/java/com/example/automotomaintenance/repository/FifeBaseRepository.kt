@@ -4,6 +4,7 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import com.example.automotomaintenance.constans.DbConstants
 import com.example.automotomaintenance.model.Company
+import com.example.automotomaintenance.model.InformationDB
 import com.example.automotomaintenance.model.Service
 import com.example.automotomaintenance.model.TransportVehicle
 import com.google.firebase.auth.ktx.auth
@@ -19,7 +20,7 @@ import kotlin.collections.ArrayList
 class FifeBaseRepository @Inject constructor(
 ) {
     interface Listener {
-        fun onCompanyUpdated(updateCompany: Company)
+        fun onCompanyUpdated(company: Company)
     }
 
     interface ListenerServiceCar {
@@ -366,25 +367,21 @@ class FifeBaseRepository @Inject constructor(
         return companies
     }
 
-    fun loadOneCompany(idCompany: String): List<Company> {
-        val companyInfo = arrayListOf<Company>()
-        db.child(Firebase.auth.currentUser?.uid ?: "")
-            .child(DbConstants.COMPANY)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    snapshot.children.forEach {
-                        (it.getValue(Company::class.java))?.let { company ->
-                            if (company.id == idCompany) {
-                                companyInfo.add(company)
-                            }
-                        }
-                    }
-                }
+    suspend fun loadOneCompany(idCompany: String): List<Company> {
 
-                override fun onCancelled(error: DatabaseError) {
-                    Log.w(TAG, "Failed to read value one company.", error.toException())
+        val snapshot = db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.COMPANY)
+            .get()
+            .await()
+
+        val companyInfo = arrayListOf<Company>()
+        snapshot.children.forEach {
+            (it.getValue(Company::class.java))?.let { company ->
+                if (company.id == idCompany) {
+                    companyInfo.add(company)
                 }
-            })
+            }
+        }
         return companyInfo
     }
 
@@ -455,5 +452,64 @@ class FifeBaseRepository @Inject constructor(
             .child(DbConstants.SERVICE)
             .child(idService)
             .removeValue()
+    }
+
+    fun addInfoServices(
+        listInfo: List<InformationDB>
+    ) {
+        for (i in listInfo.indices) {
+            db.child(Firebase.auth.currentUser?.uid ?: "")
+                .child(DbConstants.INFO_SERVICE)
+                .child(listInfo[i].id)
+                .setValue(
+                    listInfo[i]
+                ).addOnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        Log.w(TAG, "Exception aad company.", task.exception)
+                    }
+                }
+        }
+    }
+
+    suspend fun loadInfoServices(): List<InformationDB> {
+        val snapshot = db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.INFO_SERVICE)
+            .get()
+            .await()
+
+        val informationServices: List<InformationDB> = snapshot.children.map {
+            it.getValue(InformationDB::class.java)!!
+        }
+        return informationServices
+    }
+
+    suspend fun loadOneInfoService(idService: String): List<InformationDB> {
+
+        val snapshot = db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.INFO_SERVICE)
+            .get()
+            .await()
+
+        val serviceInfo = arrayListOf<InformationDB>()
+        snapshot.children.forEach {
+            (it.getValue(InformationDB::class.java))?.let { info ->
+                if (info.id == idService) {
+                    serviceInfo.add(info)
+                }
+            }
+        }
+        return serviceInfo
+    }
+
+    fun upDateInfoService(km: String, idService: String) {
+
+        db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.INFO_SERVICE)
+            .child(idService)
+            .updateChildren(
+                mapOf(
+                    "intervalKM" to km
+                )
+            )
     }
 }

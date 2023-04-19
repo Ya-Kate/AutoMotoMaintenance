@@ -62,7 +62,7 @@ class ItemShowViewModel @Inject constructor() : ViewModel(), FifeBaseRepository.
         }
     }
 
-    override fun onCompanyUpdated(updateCompany: Company) {
+    override fun onCompanyUpdated(company: Company) {
         onCompanyUpdated.postValue(true)
     }
 }

@@ -10,8 +10,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.automotomaintenance.R
 import com.example.automotomaintenance.databinding.FragmentRegisterBinding
+import com.example.automotomaintenance.model.InformationDB
 import com.example.automotomaintenance.repository.AuthRepository
+import com.example.automotomaintenance.ui.information.InformationViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -20,6 +23,7 @@ class RegisterFragment @Inject constructor() : Fragment() {
     @Inject
     lateinit var authRepository: AuthRepository
     private val viewModel: RegisterViewModel by viewModels()
+    private val viewModelFB: InformationViewModel by viewModels()
     private lateinit var binding: FragmentRegisterBinding
 
     override fun onCreateView(
@@ -46,7 +50,7 @@ class RegisterFragment @Inject constructor() : Fragment() {
             } else {
                 viewModel.login(email, password,
                     {
-                    navigateToMainFragment()
+                        navigateToMainFragment()
                     },
                     { exception ->
                         inputText = exception.toString()
@@ -66,7 +70,8 @@ class RegisterFragment @Inject constructor() : Fragment() {
                 viewModel.register(
                     email, password,
                     {
-                    navigateToMainFragment()
+                        insertListInformationDB()
+                        navigateToMainFragment()
                     },
                     { exception ->
                         inputText = exception.toString()
@@ -76,8 +81,18 @@ class RegisterFragment @Inject constructor() : Fragment() {
         }
     }
 
-    fun navigateToMainFragment() {
+    private fun navigateToMainFragment() {
         findNavController().navigate(R.id.action_registerFragment_to_navigationMainFragment)
+    }
+
+    private fun insertListInformationDB() {
+
+        val listInfo = mutableListOf<InformationDB>()
+        listInfo.add(InformationDB("Замена масла, топливный фильтр", "10 000", UUID.randomUUID().toString()))
+        listInfo.add(InformationDB("Замена свечей накала", "12 000", UUID.randomUUID().toString()))
+        listInfo.add(InformationDB("Замена колодок", "40 000", UUID.randomUUID().toString()))
+
+        viewModelFB.addInfoServicesFB(listInfo)
     }
 
     private fun showException(value: String) {

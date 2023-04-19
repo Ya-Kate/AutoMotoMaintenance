@@ -10,13 +10,19 @@ class ServiceMotorBikeViewHolder(private val binding: ItemServiceBinding) :
 
     fun bind(services: Service) {
         binding.run {
-            km.text = services.km.toString() + " km"
+            km.text = buildString {
+                append(services.km.toString())
+                append(" km")
+            }
 
             val dateFormat = getData(services.data)
             date.text = dateFormat
 
             service.text = services.service
-            cost.text = services.cost.toString() + " $"
+            cost.text = buildString {
+                append(services.cost)
+                append(" $")
+            }
         }
     }
 }

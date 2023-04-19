@@ -7,24 +7,23 @@ import androidx.room.PrimaryKey
 @Entity
 data class Company(
     @ColumnInfo(name = "name")
-    var name: String = "",
+    val name: String = "",
 
     @ColumnInfo(name = "information")
-    var information: String = "",
+    val information: String = "",
 
     @ColumnInfo(name = "phone")
-    var phone: String = "",
+    val phone: String = "",
 
     @ColumnInfo(name = "person")
-    var person: String = "",
+    val person: String = "",
 
     @ColumnInfo(name = "address")
-    var address: String = "",
+    val address: String = "",
 
     @ColumnInfo(name = "id")
-    var id: String = "",
+    val id: String = "",
 
     @PrimaryKey(autoGenerate = true)
-    var idUser: String = ""
-
+    val idUser: String = ""
 )
