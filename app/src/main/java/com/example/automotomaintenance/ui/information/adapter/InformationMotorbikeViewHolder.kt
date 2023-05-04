@@ -4,8 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.automotomaintenance.databinding.ItemInformationBinding
 import com.example.automotomaintenance.model.InformationDB
 
-
-class InformationViewHolder(
+class InformationMotorbikeViewHolder(
     private val binding: ItemInformationBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 

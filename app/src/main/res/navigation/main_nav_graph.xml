@@ -2,23 +2,24 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/graf_main"
+    android:id="@+id/graph_main"
     app:startDestination="@id/startProjectFragment">
 
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.automotomaintenance.ui.start.RegisterFragment"
-        android:label="RegisterFragment"
-        >
+        android:label="RegisterFragment">
         <action
             android:id="@+id/action_registerFragment_to_navigationMainFragment"
-            app:destination="@id/navigationMainFragment" />
+            app:destination="@id/navigationMainFragment"
+
+            />
     </fragment>
 
     <fragment
         android:id="@+id/startProjectFragment"
         android:name="com.example.automotomaintenance.ui.start.StartProjectFragment"
-        android:label="StartProjectFragment" >
+        android:label="StartProjectFragment">
         <action
             android:id="@+id/action_startProjectFragment2_to_registerFragment"
             app:destination="@id/registerFragment" />
@@ -35,11 +36,8 @@
     <action
         android:id="@+id/action_global_registerFragment"
         app:destination="@id/registerFragment"
-        app:popUpTo="@id/startProjectFragment"
-
-        android:clearTaskOnLaunch="true"
-        android:allowTaskReparenting="true"
-        />
-
+        android:finishOnTaskLaunch="true"
+        app:popUpTo="@+id/registerFragment"
+        app:popUpToInclusive="true" />
 
 </navigation>

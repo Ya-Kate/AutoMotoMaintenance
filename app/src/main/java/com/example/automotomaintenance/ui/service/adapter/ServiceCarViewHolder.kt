@@ -16,7 +16,7 @@ class ServiceCarViewHolder(private val binding: ItemServiceBinding) :
             date.text = dateFormat
 
             service.text = services.service
-            cost.text = services.cost.toString() + " $"
+            cost.text = services.cost + " $"
         }
     }
 }

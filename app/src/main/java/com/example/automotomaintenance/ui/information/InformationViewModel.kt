@@ -22,6 +22,7 @@ class InformationViewModel @Inject constructor() : ViewModel() {
     lateinit var fifeBaseRepository: FifeBaseRepository
 
     val listInformationDB = MutableLiveData<List<InformationDB>>()
+    val listInformationMotorbikeDB = MutableLiveData<List<InformationDB>>()
 
     fun loadListInformation() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -33,10 +34,26 @@ class InformationViewModel @Inject constructor() : ViewModel() {
             }
         }
     }
+    fun loadListMotorbikeInformation() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val allInfoServiceMotorbikeFireBase = fifeBaseRepository.loadInfoMotorbikeServices()
+            dataBaseRepository.addListMotorbikeInformation(allInfoServiceMotorbikeFireBase)
+
+            withContext(Dispatchers.Main) {
+                listInformationMotorbikeDB.postValue(allInfoServiceMotorbikeFireBase)
+            }
+        }
+    }
 
     fun addInfoServicesFB(listInfo: List<InformationDB>) {
         viewModelScope.launch(Dispatchers.IO) {
             fifeBaseRepository.addInfoServices(listInfo)
+        }
+    }
+
+    fun addInfoServicesMotorbikeFB(listInfo: List<InformationDB>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            fifeBaseRepository.addInfoServicesMotorbike(listInfo)
         }
     }
 }

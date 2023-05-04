@@ -460,6 +460,24 @@ class FifeBaseRepository @Inject constructor(
         for (i in listInfo.indices) {
             db.child(Firebase.auth.currentUser?.uid ?: "")
                 .child(DbConstants.INFO_SERVICE)
+                .child(DbConstants.CAR)
+                .child(listInfo[i].id)
+                .setValue(
+                    listInfo[i]
+                ).addOnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        Log.w(TAG, "Exception aad company.", task.exception)
+                    }
+                }
+        }
+    }
+    fun addInfoServicesMotorbike(
+        listInfo: List<InformationDB>
+    ) {
+        for (i in listInfo.indices) {
+            db.child(Firebase.auth.currentUser?.uid ?: "")
+                .child(DbConstants.INFO_SERVICE)
+                .child(DbConstants.MOTOR_BIKE)
                 .child(listInfo[i].id)
                 .setValue(
                     listInfo[i]
@@ -471,9 +489,12 @@ class FifeBaseRepository @Inject constructor(
         }
     }
 
+
+
     suspend fun loadInfoServices(): List<InformationDB> {
         val snapshot = db.child(Firebase.auth.currentUser?.uid ?: "")
             .child(DbConstants.INFO_SERVICE)
+            .child(DbConstants.CAR)
             .get()
             .await()
 
@@ -483,10 +504,43 @@ class FifeBaseRepository @Inject constructor(
         return informationServices
     }
 
+    suspend fun loadInfoMotorbikeServices(): List<InformationDB> {
+        val snapshot = db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.INFO_SERVICE)
+            .child(DbConstants.MOTOR_BIKE)
+            .get()
+            .await()
+
+        val informationServicesMotorbike: List<InformationDB> = snapshot.children.map {
+            it.getValue(InformationDB::class.java)!!
+        }
+        return informationServicesMotorbike
+    }
+
     suspend fun loadOneInfoService(idService: String): List<InformationDB> {
 
         val snapshot = db.child(Firebase.auth.currentUser?.uid ?: "")
             .child(DbConstants.INFO_SERVICE)
+            .child(DbConstants.CAR)
+            .get()
+            .await()
+
+        val serviceInfo = arrayListOf<InformationDB>()
+        snapshot.children.forEach {
+            (it.getValue(InformationDB::class.java))?.let { info ->
+                if (info.id == idService) {
+                    serviceInfo.add(info)
+                }
+            }
+        }
+        return serviceInfo
+    }
+
+    suspend fun loadOneInfoServiceMotorbike(idService: String): List<InformationDB> {
+
+        val snapshot = db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.INFO_SERVICE)
+            .child(DbConstants.MOTOR_BIKE)
             .get()
             .await()
 
@@ -505,6 +559,20 @@ class FifeBaseRepository @Inject constructor(
 
         db.child(Firebase.auth.currentUser?.uid ?: "")
             .child(DbConstants.INFO_SERVICE)
+            .child(DbConstants.CAR)
+            .child(idService)
+            .updateChildren(
+                mapOf(
+                    "intervalKM" to km
+                )
+            )
+    }
+
+    fun upDateInfoServiceMotorbike(km: String, idService: String) {
+
+        db.child(Firebase.auth.currentUser?.uid ?: "")
+            .child(DbConstants.INFO_SERVICE)
+            .child(DbConstants.MOTOR_BIKE)
             .child(idService)
             .updateChildren(
                 mapOf(

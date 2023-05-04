@@ -53,11 +53,6 @@ class NavigationMainFragment : Fragment(R.layout.fragment_navigation_main) {
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         }
-//        NavigationUI.setupWithNavController(binding.bottomNavigation, findNavController(R.id.nav_host_container))
-    }
-
-    fun getSupportActionBar () {
-        binding.bottomNavigation.height
     }
 }
 

@@ -10,11 +10,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.automotomaintenance.R
 import com.example.automotomaintenance.databinding.FragmentRegisterBinding
-import com.example.automotomaintenance.model.InformationDB
+import com.example.automotomaintenance.enum.ListCarEnum
+import com.example.automotomaintenance.enum.ListMotorBikeEnum
 import com.example.automotomaintenance.repository.AuthRepository
 import com.example.automotomaintenance.ui.information.InformationViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -87,12 +87,33 @@ class RegisterFragment @Inject constructor() : Fragment() {
 
     private fun insertListInformationDB() {
 
-        val listInfo = mutableListOf<InformationDB>()
-        listInfo.add(InformationDB("Замена масла, топливный фильтр", "10 000", UUID.randomUUID().toString()))
-        listInfo.add(InformationDB("Замена свечей накала", "12 000", UUID.randomUUID().toString()))
-        listInfo.add(InformationDB("Замена колодок", "40 000", UUID.randomUUID().toString()))
+        val listInfo = mutableListOf(
+            ListCarEnum.ONE.value,
+            ListCarEnum.TWO.value,
+            ListCarEnum.THREE.value,
+            ListCarEnum.FOUR.value,
+            ListCarEnum.FIVE.value,
+            ListCarEnum.SIX.value,
+            ListCarEnum.SEVEN.value,
+            ListCarEnum.EIGHT.value,
+            ListCarEnum.NIGHT.value,
+            ListCarEnum.TEN.value,
+            ListCarEnum.ELEVEN.value,
+            ListCarEnum.TWELVE.value,
+        )
 
         viewModelFB.addInfoServicesFB(listInfo)
+
+        val listInfoMotorbike = mutableListOf(
+            ListMotorBikeEnum.ONE.value,
+            ListMotorBikeEnum.TWO.value,
+            ListMotorBikeEnum.THREE.value,
+            ListMotorBikeEnum.FOUR.value,
+            ListMotorBikeEnum.FIVE.value,
+            ListMotorBikeEnum.SIX.value,
+            ListMotorBikeEnum.SEVEN.value,
+        )
+        viewModelFB.addInfoServicesMotorbikeFB(listInfoMotorbike)
     }
 
     private fun showException(value: String) {

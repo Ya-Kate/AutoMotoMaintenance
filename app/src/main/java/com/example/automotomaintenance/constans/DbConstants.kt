@@ -6,7 +6,5 @@ object DbConstants{
     const val MOTOR_BIKE = "motorbike"
     const val SERVICE = "service"
     const val COMPANY = "company"
-    const val DATA = "data"
     const val INFO_SERVICE = "informationServices"
-
 }

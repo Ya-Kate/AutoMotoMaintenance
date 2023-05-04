@@ -5,7 +5,6 @@ import androidx.room.*
 import com.example.automotomaintenance.model.InformationDB
 
 @Database(entities = [InformationDB::class], version = 1, exportSchema = false)
-@TypeConverters(InfoConverters::class)
 abstract class AppDataBase : RoomDatabase() {
 
     abstract fun informationDao(): InformationDao
@@ -23,10 +22,6 @@ abstract class AppDataBase : RoomDatabase() {
                 }
             }
             return INSTANCE
-        }
-
-        fun destroyInstance() {
-            INSTANCE = null
         }
     }
 }

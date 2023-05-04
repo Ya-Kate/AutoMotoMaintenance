@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.automotomaintenance.R
 import com.example.automotomaintenance.databinding.FragmentAddVehicleBinding
+import com.example.automotomaintenance.ui.start.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -62,8 +63,9 @@ class AddTransportFragment : Fragment() {
     }
 
     private fun route() {
-        val navController = findNavController()
-        navController.setGraph(R.navigation.main_nav_graph)
-        navController.navigate(R.id.action_global_registerFragment)
+        val mainNavController = (requireActivity() as? MainActivity)?.mainNavController
+            ?: throw IllegalStateException("wrong activity")
+        mainNavController.navigate(R.id.action_global_registerFragment)
     }
 }
+

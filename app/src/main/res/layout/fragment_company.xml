@@ -45,9 +45,7 @@
         android:id="@+id/list_company"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp0"
-
         android:layout_marginTop="@dimen/dp16"
-
         android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/add_company"
         app:layout_constraintEnd_toEndOf="parent"

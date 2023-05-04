@@ -1,7 +1,6 @@
 package com.example.automotomaintenance.ui.company.addcompany
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.automotomaintenance.R
 import com.example.automotomaintenance.databinding.FragmentAddCompanyBinding
-import com.example.automotomaintenance.databinding.FragmentCompanyBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

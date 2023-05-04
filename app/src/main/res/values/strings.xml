@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">AutoMotoMaintenance</string>
     <string name="start">start</string>
     <string name="brand">brand</string>
@@ -9,10 +9,12 @@
     <string name="add_vehicle">ADD Transport</string>
     <string name="add_company">ADD company</string>
     <string name="auto">Auto</string>
+    <string name="auto_info">Auto:</string>
     <string name="moto">Moto</string>
     <string name="auto_">AUTO:</string>
     <string name="company_">COMPANY:</string>
     <string name="moto_">MOTO:</string>
+    <string name="motorbike_info">Motorbike:</string>
     <string name="email">email</string>
     <string name="enter">Enter</string>
     <string name="register">Register</string>
@@ -28,14 +30,12 @@
     <string name="password">password</string>
     <string name="back">back</string>
     <string name="km">km</string>
-    <string name="km_km">%1$s km</string>
     <string name="choose_date">choose date</string>
     <string name="type_of_services">type of services</string>
     <string name="cost">cost</string>
     <string name="add_car_maintenance">add car \n maintenance</string>
     <string name="add_bike_maintenance">add bike \n maintenance</string>
     <string name="date">date</string>
-    <string name="text_km">km</string>
     <string name="delete">Delete</string>
     <string name="add_info">Add info</string>
     <string name="show">SHOW</string>
@@ -56,7 +56,6 @@
     <string name="call_denied">"CALL DENIED"</string>
     <string name="not_empty_add_transport">"CAN'T BE EMPTY: BRAND, NUMBER, YEAR"</string>
     <string name="not_empty_service">"CAN'T BE EMPTY: KM, SERVICE"</string>
-    <string name="km_number">"'km' must be NUMBER"</string>
     <string name="should_not_empty">"Shouldn't be empty"</string>
 
 </resources>

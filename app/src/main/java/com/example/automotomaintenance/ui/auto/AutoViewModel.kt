@@ -3,7 +3,6 @@ package com.example.automotomaintenance.ui.auto
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.automotomaintenance.model.Company
 import com.example.automotomaintenance.model.Service
 import com.example.automotomaintenance.model.TransportVehicle
 import com.example.automotomaintenance.repository.FifeBaseRepository
@@ -20,7 +19,6 @@ class AutoViewModel @Inject constructor() : ViewModel() {
     lateinit var fifeBaseRepository: FifeBaseRepository
     val infoOneAuto = MutableLiveData<ArrayList<TransportVehicle>>()
     val autoServices = MutableLiveData<List<Service>>()
-    val infoServiceOneCar = MutableLiveData<List<Service>>()
 
     fun loadOneAuto(idCar: String) {
         viewModelScope.launch(Dispatchers.IO) {
