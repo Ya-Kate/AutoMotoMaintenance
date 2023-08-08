@@ -5,10 +5,8 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.example.automotomaintenance.R
 import com.example.automotomaintenance.databinding.FragmentAddAutoBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,9 +24,6 @@ class AddAutoFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val nav = view.findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        nav?.visibility = View.GONE
 
         binding.addInfo.setOnClickListener {
 
@@ -52,7 +47,7 @@ class AddAutoFragment : Fragment() {
         }
 
         binding.back.setOnClickListener {
-            findNavController().popBackStack()
+            activity?.finish()
         }
     }
 }

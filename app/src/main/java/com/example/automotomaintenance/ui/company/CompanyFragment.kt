@@ -1,20 +1,24 @@
 package com.example.automotomaintenance.ui.company
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.automotomaintenance.R
+import com.example.automotomaintenance.activity.AddCarsActivity
+import com.example.automotomaintenance.activity.AddCompaniesActivity
 import com.example.automotomaintenance.bottomdialog.ItemCompanyBottomDialog
 import com.example.automotomaintenance.bottomdialog.ItemShowDialog
 import com.example.automotomaintenance.databinding.FragmentCompanyBinding
@@ -23,6 +27,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CompanyFragment : Fragment() {
+
+    private val SECOND_ACTIVITY_REQUEST_CODE = 0
 
     private lateinit var binding: FragmentCompanyBinding
     private lateinit var adapterCompany: CompanyAdapter
@@ -107,7 +113,37 @@ class CompanyFragment : Fragment() {
         initView()
 
         binding.addCompany.setOnClickListener {
-            findNavController().navigate(R.id.action_CompanyFragment_to_addCompanyFragment)
+//            val intent = (Intent(activity, AddCompaniesActivity::class.java))
+//            startActivityForResult(intent, SECOND_ACTIVITY_REQUEST_CODE)
+
+
+            startActivity(Intent(activity, AddCompaniesActivity::class.java))
+            Log.e("", "AAAAAAAAAAAAAAAAAAAAAAA")
+
+        }
+
+        setFragmentResultListener("requestKey") { _, bundle ->
+            val result = bundle.getBoolean("upDate")
+
+            if(result) {
+                viewModel.loadListCompanies()
+            }
         }
     }
+
+//    @Deprecated("Deprecated in Java")
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+////        viewModel.loadListCompanies()
+//
+//        if (requestCode == SECOND_ACTIVITY_REQUEST_CODE){
+//            if (resultCode == Activity.RESULT_CANCELED){
+//                val returnString = data?.getBooleanExtra("bool", false)
+//                if(returnString == true) {
+//                    viewModel.loadListCompanies()
+//                }
+//            }
+//        }
+//    }
 }

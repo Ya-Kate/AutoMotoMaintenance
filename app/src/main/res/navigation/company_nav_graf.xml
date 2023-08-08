@@ -7,13 +7,5 @@
     <fragment
         android:id="@+id/CompanyFragment"
         android:name="com.example.automotomaintenance.ui.company.CompanyFragment"
-        android:label="CompanyFragment">
-        <action
-            android:id="@+id/action_CompanyFragment_to_addCompanyFragment"
-            app:destination="@id/addCompanyFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/addCompanyFragment"
-        android:name="com.example.automotomaintenance.ui.company.addcompany.AddCompanyFragment"
-        android:label="AddCompanyFragment" />
+        android:label="CompanyFragment"/>
 </navigation>

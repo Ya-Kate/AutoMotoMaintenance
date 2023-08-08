@@ -3,27 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/addVehicle"
-    app:startDestination="@id/AddVehiclesFragment">
+    app:startDestination="@id/AddTransportFragment">
 
     <fragment
-        android:id="@+id/AddVehiclesFragment"
+        android:id="@+id/AddTransportFragment"
         android:name="com.example.automotomaintenance.ui.transport.AddTransportFragment"
-        tools:layout="@layout/fragment_add_vehicle">
-        <action
-            android:id="@+id/action_AddVehiclesFragment_to_addAutoFragment"
-            app:destination="@id/addAutoFragment" />
-        <action
-            android:id="@+id/action_AddVehiclesFragment_to_addMotoFragment"
-            app:destination="@id/addMotoFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/addAutoFragment"
-        android:name="com.example.automotomaintenance.ui.auto.addauto.AddAutoFragment"
-        android:label="AddAutoFragment" />
-    <fragment
-        android:id="@+id/addMotoFragment"
-        android:name="com.example.automotomaintenance.ui.moto.addmoto.AddMotoFragment"
-        android:label="AddMotoFragment" />
+        tools:layout="@layout/fragment_add_vehicle" />
 
 </navigation>

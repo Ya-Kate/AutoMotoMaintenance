@@ -1,14 +1,16 @@
 package com.example.automotomaintenance.ui.transport
 
 import android.animation.ValueAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.example.automotomaintenance.R
+import com.example.automotomaintenance.activity.AddCarsActivity
+import com.example.automotomaintenance.activity.AddMotorBikesActivity
 import com.example.automotomaintenance.databinding.FragmentAddVehicleBinding
 import com.example.automotomaintenance.ui.start.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +34,8 @@ class AddTransportFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getUserEmail()
+        val mainNavController = (requireActivity() as? MainActivity)?.mainNavController
+            ?: throw IllegalStateException("wrong activity")
 
         viewModel.userEmail.observe(viewLifecycleOwner) { email ->
             binding.emailUser.text = email
@@ -39,7 +43,8 @@ class AddTransportFragment : Fragment() {
 
         binding.logout.setOnClickListener {
             viewModel.logout()
-            route()
+
+            mainNavController.navigate(R.id.action_global_registerFragment)
         }
 
         binding.addVehicle.setOnClickListener {
@@ -54,18 +59,12 @@ class AddTransportFragment : Fragment() {
         }
 
         binding.addAuto.setOnClickListener {
-            findNavController().navigate(R.id.action_AddVehiclesFragment_to_addAutoFragment)
+            startActivity(Intent(activity, AddCarsActivity::class.java))
         }
 
         binding.addMoto.setOnClickListener {
-            findNavController().navigate(R.id.action_AddVehiclesFragment_to_addMotoFragment)
+            startActivity(Intent(activity, AddMotorBikesActivity::class.java))
         }
-    }
-
-    private fun route() {
-        val mainNavController = (requireActivity() as? MainActivity)?.mainNavController
-            ?: throw IllegalStateException("wrong activity")
-        mainNavController.navigate(R.id.action_global_registerFragment)
     }
 }
 
