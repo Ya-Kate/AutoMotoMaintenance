@@ -17,7 +17,7 @@ class SearchViewModel @Inject constructor(
     private val fifeBaseRepository: FifeBaseRepository
 ) : ViewModel() {
 
-    lateinit var listCompanies: List<Company>
+    private lateinit var listCompanies: List<Company>
     val searchResult = MutableLiveData<ArrayList<Company>?>()
 
     fun loadListCompanies() {

@@ -1,11 +1,9 @@
 package com.example.automotomaintenance.ui.company
 
 import android.Manifest
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +15,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.automotomaintenance.R
-import com.example.automotomaintenance.activity.AddCarsActivity
 import com.example.automotomaintenance.activity.AddCompaniesActivity
 import com.example.automotomaintenance.bottomdialog.ItemCompanyBottomDialog
 import com.example.automotomaintenance.bottomdialog.ItemShowDialog
@@ -27,8 +24,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CompanyFragment : Fragment() {
-
-    private val SECOND_ACTIVITY_REQUEST_CODE = 0
 
     private lateinit var binding: FragmentCompanyBinding
     private lateinit var adapterCompany: CompanyAdapter
@@ -95,7 +90,6 @@ class CompanyFragment : Fragment() {
     ): View {
         binding = FragmentCompanyBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -109,17 +103,10 @@ class CompanyFragment : Fragment() {
                 progressBar.visibility = View.INVISIBLE
             }
         }
-
         initView()
 
         binding.addCompany.setOnClickListener {
-//            val intent = (Intent(activity, AddCompaniesActivity::class.java))
-//            startActivityForResult(intent, SECOND_ACTIVITY_REQUEST_CODE)
-
-
             startActivity(Intent(activity, AddCompaniesActivity::class.java))
-            Log.e("", "AAAAAAAAAAAAAAAAAAAAAAA")
-
         }
 
         setFragmentResultListener("requestKey") { _, bundle ->
@@ -131,19 +118,12 @@ class CompanyFragment : Fragment() {
         }
     }
 
-//    @Deprecated("Deprecated in Java")
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//
-////        viewModel.loadListCompanies()
-//
-//        if (requestCode == SECOND_ACTIVITY_REQUEST_CODE){
-//            if (resultCode == Activity.RESULT_CANCELED){
-//                val returnString = data?.getBooleanExtra("bool", false)
-//                if(returnString == true) {
-//                    viewModel.loadListCompanies()
-//                }
-//            }
-//        }
-//    }
+    override fun onResume() {
+        super.onResume()
+        updateFragment()
+    }
+
+    private fun updateFragment() {
+        initView()
+    }
 }

@@ -7,7 +7,7 @@ import com.example.automotomaintenance.databinding.ItemVehicleBinding
 import com.example.automotomaintenance.model.TransportVehicle
 
 class CarAdapter(
-    private val onClick: (idCar: String) -> Unit
+    private val onClick: (idCar: String) -> Unit,
 ) : ListAdapter<TransportVehicle, CarViewHolder>(CarDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {

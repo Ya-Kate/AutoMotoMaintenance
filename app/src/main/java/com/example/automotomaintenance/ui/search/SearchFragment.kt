@@ -31,7 +31,7 @@ class SearchFragment : Fragment() {
         adapterSearch = SearchAdapter(onPhoneClick)
         binding.listCompany.adapter = adapterSearch
         binding.listCompany.layoutManager = LinearLayoutManager(requireContext())
-        viewModel.searchResult.observe(viewLifecycleOwner){
+        viewModel.searchResult.observe(viewLifecycleOwner) {
             adapterSearch.submitList(it)
         }
     }
@@ -54,10 +54,11 @@ class SearchFragment : Fragment() {
                     .show()
             }
         }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
@@ -73,5 +74,4 @@ class SearchFragment : Fragment() {
         }
         initView()
     }
-
 }

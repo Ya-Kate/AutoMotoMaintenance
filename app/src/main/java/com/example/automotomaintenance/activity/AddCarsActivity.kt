@@ -14,7 +14,7 @@ class AddCarsActivity: AppCompatActivity() {
         setContentView(R.layout.activity_add_cars)
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.add_moto_container, AddAutoFragment())
+            .replace(R.id.add_car_container, AddAutoFragment())
             .commit()
     }
 }

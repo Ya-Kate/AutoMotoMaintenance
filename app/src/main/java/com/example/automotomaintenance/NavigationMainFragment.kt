@@ -17,7 +17,7 @@ class NavigationMainFragment : Fragment(R.layout.fragment_navigation_main) {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentNavigationMainBinding.inflate(inflater, container, false)
         return binding.root

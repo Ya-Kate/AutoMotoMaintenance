@@ -22,7 +22,7 @@ class SearchAdapter(
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        getItem(position)?.let { company ->
+        getItem(position)?.let {
             holder.bind(getItem(position))
             holder.setOnPhoneClick(onPhoneClick)
         }

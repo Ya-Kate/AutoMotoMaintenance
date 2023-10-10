@@ -49,7 +49,7 @@ class NoteServiceCarViewModel @Inject constructor() : ViewModel(),
         service: String,
         cost: String,
         idCar: String,
-        idServiceCar: String
+        idServiceCar: String,
     ) {
 
         if (cost.isBlank() || service.isBlank()) {

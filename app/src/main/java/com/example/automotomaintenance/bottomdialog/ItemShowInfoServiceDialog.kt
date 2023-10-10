@@ -55,7 +55,6 @@ class ItemShowInfoServiceDialog : DialogFragment() {
 
         viewModel.infoService.observe(viewLifecycleOwner) {
             val infoService: List<InformationDB> = it
-
             binding.name.text = infoService[0].nameWork
             binding.km.setText(infoService[0].intervalKM)
         }

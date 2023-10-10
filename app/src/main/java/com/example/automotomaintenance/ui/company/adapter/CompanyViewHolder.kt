@@ -16,9 +16,9 @@ class CompanyViewHolder(private val binding: ItemCompanyBinding) :
             address.text = company.address
         }
     }
-    fun setOnPhoneClick(onFonClic :(String) -> Unit) {
+    fun setOnPhoneClick(onFonClick :(String) -> Unit) {
         binding.phone.setOnClickListener{
-            onFonClic.invoke(binding.phone.text.toString())
+            onFonClick.invoke(binding.phone.text.toString())
         }
     }
 }

@@ -20,7 +20,7 @@ class ItemShowInfoServiceMotorbikeDialog : DialogFragment() {
     private val viewModel: ItemShowInfoServiceMotorbikeViewModel by viewModels()
 
     companion object {
-        val TAG: String = ItemShowInfoServiceMotorbikeDialog::class.java.name
+        private val TAG: String = ItemShowInfoServiceMotorbikeDialog::class.java.name
         fun getInstance(
             fragmentManager: FragmentManager,
             idService: String

@@ -30,7 +30,7 @@ class AutoFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentAutoBinding.inflate(inflater, container, false)
         return binding.root

@@ -3,6 +3,7 @@ package com.example.automotomaintenance.enum
 import com.example.automotomaintenance.model.InformationDB
 
 enum class ListMotorBikeEnum(val value: InformationDB) {
+
     ONE(
         InformationDB(
             "Моторное масло и масляный фильтр", "4-5т.км/перед сезоном", "001", 1

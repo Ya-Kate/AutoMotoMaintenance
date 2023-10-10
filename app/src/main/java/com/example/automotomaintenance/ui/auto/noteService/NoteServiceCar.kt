@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -26,7 +25,7 @@ class NoteServiceCar : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentNoteServiceAutoBinding.inflate(inflater, container, false)
         return binding.root
@@ -61,8 +60,8 @@ class NoteServiceCar : Fragment() {
         val cal = Calendar.getInstance()
         var dataService = cal.time
 
-        val dateSetListener = object : DatePickerDialog.OnDateSetListener {
-            override fun onDateSet(view: DatePicker, year: Int, month: Int, dayOfMonth: Int) {
+        val dateSetListener =
+            DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                 cal.set(Calendar.YEAR, year)
                 cal.set(Calendar.MONTH, month)
                 cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
@@ -70,18 +69,15 @@ class NoteServiceCar : Fragment() {
                 dataService = cal.time
                 binding.data.text = getData(dataService)
             }
-        }
 
-        binding.chooseDate.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                DatePickerDialog(
-                    requireContext(), dateSetListener,
-                    cal.get(Calendar.YEAR),
-                    cal.get(Calendar.MONTH),
-                    cal.get(Calendar.DAY_OF_MONTH)
-                ).show()
-            }
-        })
+        binding.chooseDate.setOnClickListener {
+            DatePickerDialog(
+                requireContext(), dateSetListener,
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)
+            ).show()
+        }
 
 
         binding.no.setOnClickListener {

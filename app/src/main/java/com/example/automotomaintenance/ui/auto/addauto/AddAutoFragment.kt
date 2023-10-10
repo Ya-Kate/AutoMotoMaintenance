@@ -17,11 +17,12 @@ class AddAutoFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentAddAutoBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -32,11 +33,14 @@ class AddAutoFragment : Fragment() {
             val year = binding.year.editText?.text.toString()
             val volume = binding.volume.editText?.text.toString()
 
-            if(brand.isBlank() || number.isBlank() || year.isBlank()) {
-                val toast:Toast = Toast.makeText(requireContext(), R.string.not_empty_add_transport, Toast.LENGTH_LONG)
+            if (brand.isBlank() || number.isBlank() || year.isBlank()) {
+                val toast: Toast = Toast.makeText(
+                    requireContext(),
+                    R.string.not_empty_add_transport,
+                    Toast.LENGTH_LONG
+                )
                 toast.show()
-            }
-            else{
+            } else {
                 viewModel.addAuto(brand, number, year, volume)
 
                 binding.brand.editText?.text = null

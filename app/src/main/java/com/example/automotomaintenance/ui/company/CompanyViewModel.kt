@@ -31,16 +31,6 @@ class CompanyViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-//    suspend fun loadOneCompany(idCompany: String) {
-//
-//        viewModelScope.launch(Dispatchers.IO) {
-//            val loadCompany = fifeBaseRepository.loadOneCompany(idCompany)
-//            withContext(Dispatchers.Main) {
-//                company.postValue(loadCompany)
-//            }
-//        }
-//    }
-
     fun deleteCompany(nameCompany: String) {
         viewModelScope.launch(Dispatchers.IO) {
             fifeBaseRepository.deleteCompany(nameCompany)

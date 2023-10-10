@@ -53,7 +53,6 @@ class AddMotoFragment : Fragment() {
 
         binding.back.setOnClickListener {
             activity?.finish()
-//            findNavController().popBackStack()
         }
     }
 }

@@ -13,7 +13,6 @@ class InformationMotorbikeViewHolder(
             nameWork.text = item.nameWork
             km.text = buildString {
                 append(item.intervalKM)
-//                append(" km")
             }
         }
     }

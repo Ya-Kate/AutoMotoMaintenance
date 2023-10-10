@@ -21,8 +21,4 @@ class DataBaseRepository @Inject constructor(
     suspend fun addListMotorbikeInformation(infoList: List<InformationDB>) {
         db.insertListMotorbikeInformation(infoList)
     }
-
-    suspend fun loadListInformation(): List<InformationDB> {
-        return db.selectAllInformation()
-    }
 }

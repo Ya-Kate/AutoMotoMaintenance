@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.automotomaintenance.databinding.ItemCompanyBinding
 import com.example.automotomaintenance.model.Company
 
-class SearchViewHolder (private val binding: ItemCompanyBinding) :
+class SearchViewHolder(private val binding: ItemCompanyBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(company: Company) {
@@ -16,9 +16,10 @@ class SearchViewHolder (private val binding: ItemCompanyBinding) :
             address.text = company.address
         }
     }
-    fun setOnPhoneClick(onFonClic :(String) -> Unit) {
-        binding.phone.setOnClickListener{
-            onFonClic.invoke(binding.phone.text.toString())
+
+    fun setOnPhoneClick(onFonClick: (String) -> Unit) {
+        binding.phone.setOnClickListener {
+            onFonClick.invoke(binding.phone.text.toString())
         }
     }
 }

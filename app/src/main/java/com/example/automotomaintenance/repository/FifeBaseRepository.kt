@@ -253,7 +253,7 @@ class FifeBaseRepository @Inject constructor(
         service: String,
         cost: String,
         idCar: String,
-        idServiceCar: String
+        idServiceCar: String,
     ) {
         val serviceCar = Service(
             km, data, service, cost, idServiceCar, Firebase.auth.currentUser?.uid ?: ""
@@ -318,7 +318,7 @@ class FifeBaseRepository @Inject constructor(
         service: String,
         cost: String,
         idMoto: String,
-        idService: String
+        idService: String,
     ) {
         val serviceMoto = Service(
             km, data, service, cost, idService, Firebase.auth.currentUser?.uid ?: ""
@@ -337,7 +337,7 @@ class FifeBaseRepository @Inject constructor(
     }
 
     fun addCompany(
-        name: String, information: String, phone: String, person: String, address: String
+        name: String, information: String, phone: String, person: String, address: String,
     ) {
         val idCompany = UUID.randomUUID().toString()
         db.child(Firebase.auth.currentUser?.uid ?: "")
@@ -391,7 +391,7 @@ class FifeBaseRepository @Inject constructor(
         information: String?,
         phone: String?,
         person: String?,
-        address: String?
+        address: String?,
     ) {
         val company = Company(
             nameCompany.toString(),
@@ -455,7 +455,7 @@ class FifeBaseRepository @Inject constructor(
     }
 
     fun addInfoServices(
-        listInfo: List<InformationDB>
+        listInfo: List<InformationDB>,
     ) {
         for (i in listInfo.indices) {
             db.child(Firebase.auth.currentUser?.uid ?: "")
@@ -471,8 +471,9 @@ class FifeBaseRepository @Inject constructor(
                 }
         }
     }
+
     fun addInfoServicesMotorbike(
-        listInfo: List<InformationDB>
+        listInfo: List<InformationDB>,
     ) {
         for (i in listInfo.indices) {
             db.child(Firebase.auth.currentUser?.uid ?: "")
@@ -488,7 +489,6 @@ class FifeBaseRepository @Inject constructor(
                 }
         }
     }
-
 
 
     suspend fun loadInfoServices(): List<InformationDB> {
