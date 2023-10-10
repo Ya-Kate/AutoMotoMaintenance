@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp16">
+
+        <TextView
+            android:id="@+id/km"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ubuntu_regular"
+            android:gravity="start"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp24" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:fontFamily="@font/ubuntu_regular"
+            android:gravity="end"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp24" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:fontFamily="@font/ubuntu_regular"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp24" />
+
+    <TextView
+        android:id="@+id/cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp250"
+        android:layout_marginTop="@dimen/dp10"
+        android:fontFamily="@font/ubuntu_regular"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp24" />
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="wrap_content"
+        android:layout_height="3dp"
+        android:background="@drawable/separator_list" />
+
+</LinearLayout>

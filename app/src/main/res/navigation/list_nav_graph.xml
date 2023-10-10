@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list"
+    app:startDestination="@id/ListVehicleFragment">
+
+    <fragment
+        android:id="@+id/ListVehicleFragment"
+        android:name="com.example.automotomaintenance.ui.list.ListTransportFragment"
+        tools:layout="@layout/fragment_list_vehical">
+        <action
+            android:id="@+id/action_ListVehicleFragment_to_autoFragment"
+            app:destination="@id/autoFragment" />
+        <action
+            android:id="@+id/action_ListVehicleFragment_to_motoFragment"
+            app:destination="@id/motoFragment" />
+        <action
+            android:id="@+id/action_ListVehicleFragment_to_addServiceFragment"
+            app:destination="@id/addServiceFragment" />
+        <action
+            android:id="@+id/action_ListVehicleFragment_to_addMotoServiceFragment"
+            app:destination="@id/addMotoServiceFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/autoFragment"
+        android:name="com.example.automotomaintenance.ui.auto.AutoFragment"
+        android:label="AutoFragment">
+        <argument
+            android:name="autoArg"
+            android:defaultValue="No"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_autoFragment_to_serviceNoteCar"
+            app:destination="@id/noteServiceCar" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/motoFragment"
+        android:name="com.example.automotomaintenance.ui.moto.MotoFragment"
+        android:label="MotoFragment">
+        <argument
+            android:name="motoArg"
+            android:defaultValue="No"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_motoFragment_to_noteServiceMoto"
+            app:destination="@id/noteServiceMoto" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addServiceFragment"
+        android:name="com.example.automotomaintenance.ui.service.AddAutoServiceFragment"
+        android:label="AddServiceFragment">
+        <argument
+            android:name="numberArg"
+            android:defaultValue="No"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addMotoServiceFragment"
+        android:name="com.example.automotomaintenance.ui.service.AddMotoServiceFragment"
+        android:label="AddMotoServiceFragment">
+        <argument
+            android:name="numberArg"
+            android:defaultValue="No"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/noteServiceCar"
+        android:name="com.example.automotomaintenance.ui.auto.noteService.NoteServiceCar"
+        android:label="ServiceNoteAuto">
+        <argument
+            android:name="idCarArg"
+            android:defaultValue="No"
+            app:argType="string" />
+        <argument
+            android:name="idServiceArg"
+            android:defaultValue="No"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteServiceMoto"
+        android:name="com.example.automotomaintenance.ui.moto.noteService.NoteServiceMoto"
+        android:label="NoteServiceMoto">
+        <argument
+            android:name="idMotoArg"
+            android:defaultValue="No"
+            app:argType="string" />
+        <argument
+            android:name="idServiceArg"
+            android:defaultValue="No"
+            app:argType="string" />
+    </fragment>
+
+</navigation>

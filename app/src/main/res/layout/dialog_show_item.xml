@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_button_text">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="@dimen/dp16"
+            android:text="@string/edit" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ubuntu_regular"
+            android:hint="@string/name_company"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp32" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ubuntu_regular"
+            android:hint="@string/information"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp24" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
+            android:fontFamily="@font/ubuntu_regular"
+            android:hint="@string/phone"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp24" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/human"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ubuntu_regular"
+            android:hint="@string/person"
+            android:inputType="textMultiLine"
+            android:padding="@dimen/dp10"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp24" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ubuntu_regular"
+            android:hint="@string/address"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp24" />
+
+        <View
+            android:id="@+id/separator"
+            android:layout_width="wrap_content"
+            android:layout_height="3dp"
+            android:layout_marginTop="@dimen/dp10"
+            android:background="@drawable/separator"
+            tools:ignore="MissingConstraints" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp24">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/fail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_button_text"
+                android:text="@string/no" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/success"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@drawable/bg_button_text"
+                android:text="@string/yes" />
+        </FrameLayout>
+    </LinearLayout>
+</ScrollView>

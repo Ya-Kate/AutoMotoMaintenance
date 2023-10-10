@@ -7,4 +7,30 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bg_button">#90D6D0</color>
+    <color name="bg_button_add">#B0B3F1</color>
+    <color name="bg_navigation">#D7F6F3</color>
+    <color name="bg_add">#082EEF</color>
+    <color name="bg_add_text_end">#FFFFFFFF</color>
+    <color name="bg_add_text_start">#D7BEFA</color>
+    <color name="bg_add_text_stroke">#7609AC</color>
+    <color name="bg_button_text_end">#FFFFFFFF</color>
+    <color name="bg_button_text_start">#BEF5EA</color>
+    <color name="bg_button_text_stroke">#064938</color>
+    <color name="bg_fragment_one">#F2F7F5</color>
+    <color name="bg_fragment_two">#92EFCA</color>
+    <color name="bg_fragment_three">#F2F7F5</color>
+    <color name="bg_fragment_four">#1DEAB7</color>
+    <color name="bg_fragment_five">#75C4F8</color>
+    <color name="bg_fragment_six">#F3F38C</color>
+    <color name="bg_fragment_second_one">#F2F7F5</color>
+    <color name="bg_fragment_second_two">#B2C0F5</color>
+    <color name="bg_fragment_second_three">#F2F7F5</color>
+    <color name="bg_fragment_second_four">#659CF0</color>
+    <color name="bg_fragment_second_five">#0438F8</color>
+    <color name="bg_fragment_second_six">#9058F8</color>
+    <color name="separator">#04BBA3</color>
+    <color name="separator_list">#734DDA</color>
+
+
 </resources>
